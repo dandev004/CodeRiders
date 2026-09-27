@@ -83,7 +83,7 @@ def _emails(text: str) -> list[str]:
 @app.post("/api/jobs")
 async def create_job(
     file: UploadFile = File(...),
-    meeting_type: str = Form("medical"),
+    meeting_type: str = Form("auto"),  # auto = tipul e detectat din conținut de LLM (rutarea n8n îl folosește)
     output_language: str = Form(None),
     meeting_date: str = Form(None),
     send_email: bool | None = Form(None),
@@ -94,7 +94,7 @@ async def create_job(
     ext = Path(file.filename or "audio.webm").suffix.lower() or ".webm"
     if ext not in ALLOWED_EXT:
         raise HTTPException(400, f"Format nesuportat: {ext}")
-    if meeting_type not in cfg.meeting_types:
+    if meeting_type != "auto" and meeting_type not in cfg.meeting_types:
         raise HTTPException(400, f"Tip de ședință necunoscut: {meeting_type}")
     lang = output_language or cfg.output.default_language
     if lang not in cfg.output.languages:

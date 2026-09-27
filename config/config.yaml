@@ -108,7 +108,7 @@ llm:
   chunk_tokens: 5000            # transcrierea lungă e procesată în bucăți (map-reduce)
   temperature: 0.0             # determinist: același audio -> același proces-verbal
   seed: 42
-  max_output_tokens: 3000       # plafon: un JSON care intră în buclă nu poate bloca pipeline-ul
+  max_output_tokens: 4096       # plafon: un JSON care intră în buclă nu poate bloca pipeline-ul
   think: false
   timeout_s: 900
 

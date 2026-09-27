@@ -72,11 +72,10 @@ MOM_SCHEMA = {"type": "object", "properties": {
                  "verification_notes", "next_meeting"]}
 
 SUMMARY_SCHEMA = {"type": "object", "properties": {
-    "title": _STR, "summary": _STR,
-    "topics": {"type": "array", "items": TOPIC},
+    "title": _STR, "summary": _STR, "meeting_type": _STR,
     "open_issues": {"type": "array", "items": _STR},
     "next_meeting": _NSTR},
-    "required": ["title", "summary", "topics", "open_issues", "next_meeting"]}
+    "required": ["title", "summary", "meeting_type", "open_issues", "next_meeting"]}
 
 # ------------------------------------------------------------------------------------------------
 # Prompturi
@@ -94,7 +93,10 @@ Reguli stricte:
 - Un termen deformat de recunoașterea vocală îl corectezi DOAR dacă forma corectă e evidentă (ex. „ceftriaxonă”
   auzit „cefriaxonă”, „Pseudomonas” auzit „pseudomonaz”). Altfel îl lași cum e — fără presupuneri de tipul „probabil X”.
 - DECIZIE = ceva ce s-a hotărât/aprobat/stabilit (o conduită, o schimbare de tratament, o aprobare, o regulă).
-  Nu este decizie o simplă constatare sau o discuție fără concluzie.
+  La consiliul medical, ORICE modificare de tratament anunțată sau deja făcută e o decizie separată, cu valorile
+  rostite: se administrează/reîncarcă volum, se scade/crește/oprește un vasopresor sau inotrop (NA, dobutamină),
+  se comandă/transfuzează sânge, se schimbă/ajustează antibioticul, se montează un cateter/linie arterială,
+  se indică o investigație sau un consult. Nu este decizie o simplă constatare sau o discuție fără concluzie.
 - SARCINĂ (action item) = cineva trebuie să facă concret ceva după/în urma ședinței. Owner = persoana care
   preia sarcina (nume dacă e rostit, altfel funcția, ex. „medicul de gardă ATI”); owner_speaker = eticheta
   vorbitorului (S1, S2...) dacă din dialog reiese cine a preluat-o, altfel null.
@@ -105,6 +107,7 @@ Reguli stricte:
 - evidence_quote = fragmentul EXACT (copiat cuvânt cu cuvânt, în limba originală, 5-25 de cuvinte) din transcriere
   care susține decizia/sarcina. timestamp = marcajul de timp [hh:mm:ss] al acelui fragment.
 - Pacienții se identifică doar cum apar în transcriere (ex. „pacientul de pe patul 4”) — nu adăuga date personale.
+  Liniile „— se discută: patul N —” arată pacientul discutat în replicile care urmează.
 - subject = CUI îi aparține informația: pentru un pacient „Patul N” dacă patul e rostit, altfel o descriere scurtă
   („pacientul cu hidronefroză”); pentru teme non-clinice tema („Grafic de gărzi”, „Achiziții”). Același pacient are
   EXACT același subject în toate subiectele, deciziile și sarcinile.
@@ -116,15 +119,27 @@ Reguli stricte:
   sau se prezintă), iar rolul dedus din context (ex. „șef ATI”, „medic cardiolog”), altfel null."""
 
 MAP_PROMPT = """Tipul ședinței: {meeting_type}. Data ședinței: {date} ({weekday}).
-Aceasta este partea {part} din {parts} a transcrierii.
+Aceasta este partea {part} din {parts} a transcrierii.{focus}
 
 TRANSCRIERE:
 {transcript}
 
 Extrage din această parte: participanții (etichete de vorbitor); subiectele — câte unul pentru FIECARE pacient
-discutat (summary = situația clinică: diagnostic, evoluție, parametri și doze rostite) și pentru fiecare temă
-non-clinică; deciziile; sarcinile (cu responsabil și termen); problemele rămase deschise; confuziile de verificat.
-Fiecare element are subject (pacientul sau tema). Răspunde în JSON."""
+discutat și pentru fiecare temă non-clinică; deciziile; sarcinile (cu responsabil și termen); problemele rămase
+deschise; confuziile de verificat. Fiecare element are subject (pacientul sau tema).
+
+Pentru un pacient, summary acoperă, cât s-a rostit, în 4-7 propoziții clinice:
+1) diagnosticul principal, istoricul și intervențiile deja făcute (ex. angioplastie, tromboaspirație, operații);
+2) parametrii vitali și analizele CU VALORILE rostite (TA, AV, SpO2, FEVS, Hb, lactat, creatinină, uree…);
+3) evoluția și cauza ei: ce se ameliorează sau se agravează și de ce (ex. „după ajustarea X s-au redus dozele de Y”);
+4) tratamentul curent și modificările lui (volum, vasopresoare/inotrope, antibiotice, transfuzii, stimulare).
+Fiecare modificare de tratament (inclusiv o transfuzie comandată sau o doză redusă) este și o decizie separată.
+Nu omite diagnosticul principal, modificările de tratament și dinamica parametrilor. Răspunde în JSON."""
+
+FOCUS_BED = """
+În această parte se discută pacientul de pe patul {bed}: diagnosticul, valorile, deciziile și sarcinile îi aparțin
+lui (subject „Patul {bed}”), cu excepția celor pentru care se spune explicit alt pat. Pentru el scrie UN SINGUR
+element în topics (situația clinică unitară); sarcinile, responsabilii și confuziile NU se scriu în topics."""
 
 SUMMARY_PROMPT = """Tipul ședinței: {meeting_type}. Data ședinței: {date} ({weekday}). Durata: {duration}.
 
@@ -132,9 +147,7 @@ Mai jos sunt subiectele, deciziile și sarcinile deja extrase (și verificate) d
 Scrie în limba {out_lang}:
 - title: titlu scurt și concret al ședinței (max 12 cuvinte);
 - summary: rezumat executiv de 3-5 propoziții — ce s-a discutat și ce s-a hotărât;
-- topics: câte UN element pentru fiecare pacient/temă (unește aparițiile aceluiași subject), păstrează subject exact
-  cum apare în extrase și marcajul de timp al primei apariții; summary = situația clinică concisă, în stil clinic,
-  cu valorile și dozele rostite (max 15);
+- meeting_type: tipul ședinței după conținut, una dintre valorile: {type_choices};
 - open_issues: problemele rămase nerezolvate (unite, fără duplicate); next_meeting: dacă s-a stabilit, altfel null.
 Nu adăuga nimic ce nu apare în extrase.
 
@@ -176,7 +189,15 @@ def build_turns(segments: list[dict], max_gap: float = 2.0) -> list[dict]:
 
 
 def render_transcript(turns: list[dict]) -> str:
-    return "\n".join(f"[{fmt_ts(t['start'])}] {t['speaker']} ({'/'.join(t['langs'])}): {t['text']}" for t in turns)
+    """Replicile cu marcaj de timp; când se trece la alt pat, o linie „— se discută: patul N —” (calculată din
+    transcriere, nu ghicită), ca LLM-ul să nu atribuie valorile și deciziile altui pacient."""
+    out, cur = [], None
+    for t in turns:
+        if t.get("bed_ctx") and t["bed_ctx"] != cur:
+            cur = t["bed_ctx"]
+            out.append(f"— se discută: patul {cur} —")
+        out.append(f"[{fmt_ts(t['start'])}] {t['speaker']} ({'/'.join(t['langs'])}): {t['text']}")
+    return "\n".join(out)
 
 
 def chunk_turns(turns: list[dict], max_chars: int) -> list[list[dict]]:
@@ -192,6 +213,28 @@ def chunk_turns(turns: list[dict], max_chars: int) -> list[list[dict]]:
     if cur:
         chunks.append(cur)
     return chunks
+
+
+def chunk_by_patient(turns: list[dict], max_chars: int) -> list[tuple[str | None, list[dict]]]:
+    """Bucățile urmează pacienții (patul discutat, din „patul N” rostit): un apel LLM vede un singur pacient, deci nu
+    mută valori sau decizii între pacienți și nu scapă detaliile unui caz lung. Discuțiile scurte vecine se unesc
+    (sub max_chars/2) ca o ședință cu mulți pacienți să nu ceară prea multe apeluri; cele lungi se taie la max_chars.
+    Fără paturi rostite (ședință executivă/administrativă) = bucăți după mărime, ca înainte."""
+    groups: list[tuple[str | None, list[dict]]] = []
+    for t in turns:
+        bed = t.get("bed_ctx")
+        if groups and groups[-1][0] == bed:
+            groups[-1][1].append(t)
+        else:
+            groups.append((bed, [t]))
+    size = lambda ts: sum(len(x["text"]) + 30 for x in ts)  # noqa: E731
+    merged: list[tuple[str | None, list[dict]]] = []
+    for bed, g in groups:
+        if merged and size(merged[-1][1]) + size(g) <= max_chars // 2:
+            merged[-1] = (None, merged[-1][1] + g)  # mai mulți pacienți: marcajele din transcriere îi separă
+        else:
+            merged.append((bed, g))
+    return [(bed, part) for bed, g in merged for part in chunk_turns(g, max_chars)]
 
 
 class Ollama:
@@ -323,11 +366,17 @@ def _valid_date(s: str | None, meeting_date: dt.date) -> str | None:
 _SUBJ_PREFIX = re.compile(r"^(?:pacient(?:ul|a)?|patient|пациент\w*|bolnav\w*)\s+(?:de pe |cu |din |with |с )?", re.I)
 
 
-def assign_subjects(mom: dict) -> None:
-    """Grupare deterministă pe pacient/temă: cheia vine din numărul patului (regex), nu din formularea LLM-ului,
-    ca „Patul 8”, „pacientul de pe patul 8” și „bed 8” să ajungă în același bloc al procesului-verbal."""
-    from .clinical import bed_of, is_patient
+from .clinical import _BED as _BED_NUM  # noqa: E402
 
+
+def assign_subjects(mom: dict, turns: list[dict] | None = None) -> None:
+    """Grupare deterministă pe pacient/temă: cheia vine din numărul patului (regex), nu din formularea LLM-ului,
+    ca „Patul 8”, „pacientul de pe patul 8” și „bed 8” să ajungă în același bloc al procesului-verbal.
+    O decizie/sarcină fără pat în propriul text primește patul discutat în transcriere la momentul citatului
+    (la consiliu pacienții se iau pe rând) — LLM-ul confundă uneori pacienții între ei."""
+    from .clinical import bed_at, bed_of, bed_timeline, is_patient
+
+    timeline = bed_timeline(turns or [])
     text_keys: dict[str, str] = {}
 
     def key_for(subject: str | None, *texts: str | None) -> tuple[str, str] | None:
@@ -348,6 +397,13 @@ def assign_subjects(mom: dict) -> None:
     for key, field in (("decisions", "decision"), ("action_items", "task"), ("verification_notes", "note")):
         for it in mom.get(key, []):
             got = key_for(it.get("subject"), it.get(field))
+            ctx = bed_at(timeline, _ts_seconds(it.get("timestamp")) or 0)
+            quoted = bed_of(it.get("evidence_quote"))  # patul rostit chiar în citat are prioritate
+            ctx = quoted or ctx
+            if ctx and (got is None or got[1] == "patient"):
+                got = f"bed:{ctx}", "patient"
+                if bed_of(it.get(field)) not in (None, ctx):  # LLM-ul a scris alt pat decât cel discutat
+                    it[field] = _BED_NUM.sub(lambda m: m.group(0)[:m.start(1) - m.start(0)] + ctx, it[field])
             if got is None:  # fără subiect: situația discutată cel mai recent înainte (max 3 min)
                 ts = _ts_seconds(it.get("timestamp")) or 0
                 prev = [t for t in topics if (_ts_seconds(t.get("timestamp")) or 0) <= ts + 5
@@ -393,7 +449,14 @@ def postprocess(mom: dict, turns: list[dict], speakers: list[str], meeting_date:
         it["id"] = f"D{i}"
     for i, it in enumerate(mom.get("action_items", []), 1):
         it["id"] = f"A{i}"
-    assign_subjects(mom)
+    # unitățile de măsură adăugate de LLM, nerostite în ședință, se scot („TA 80/40 mmHg” -> „TA 80/40”)
+    from .clinical import strip_unspoken_units
+    spoken = " ".join(t.get("text") or "" for t in turns)
+    for key, field in (("topics", "summary"), ("decisions", "decision"), ("action_items", "task")):
+        for it in mom.get(key, []):
+            it[field] = strip_unspoken_units(it.get(field), spoken)
+    mom["summary"] = strip_unspoken_units(mom.get("summary"), spoken)
+    assign_subjects(mom, turns)
     return mom
 
 
@@ -430,6 +493,12 @@ def merge_parts(parts: list[dict]) -> dict:
     return mom
 
 
+TYPE_HINTS = {
+    "medical": " (pacienți, diagnostic, tratament, consulturi)",
+    "executive": " (conducere: strategie, buget, indicatori, investiții)",
+    "administrative": " (organizare: personal, gărzi, achiziții, logistică, IT)",
+}
+
 _INVENTED_DEADLINE = re.compile(r"implicit|standard|nu s-a (specificat|precizat|stabilit)|nespecificat|probabil|"
                                 r"continuu|în continuare|la nevoie|dacă e necesar|not specified|не указан", re.IGNORECASE)
 
@@ -448,9 +517,14 @@ def generate_mom(segments: list[dict], meeting_type: str, meeting_date: dt.date,
         raise RuntimeError(msg)
 
     turns = build_turns(segments)
+    from .clinical import bed_at, bed_timeline
+    timeline = bed_timeline(turns)
+    for t in turns:
+        t["bed_ctx"] = bed_at(timeline, t["start"])
     max_chars = int(cfg.llm.chunk_tokens) * 3
-    chunks = chunk_turns(turns, max_chars)
-    mt = cfg.meeting_types.get(meeting_type, {}).get("ro", meeting_type)
+    chunks = chunk_by_patient(turns, max_chars)
+    mt = cfg.meeting_types.get(meeting_type, {}).get("ro") or "nespecificat — se deduce din conținut"
+    type_choices = "; ".join(f"{k} = {v.get('ro', k)}{TYPE_HINTS.get(k, '')}" for k, v in cfg.meeting_types.items())
     common = dict(meeting_type=mt, date=meeting_date.isoformat(), weekday=WEEKDAYS_RO[meeting_date.weekday()],
                   duration=fmt_ts(duration_s), speakers=", ".join(speakers) or "necunoscut")
     system = SYSTEM.format(out_lang=LANG_NAMES[out_lang])
@@ -458,12 +532,15 @@ def generate_mom(segments: list[dict], meeting_type: str, meeting_date: dt.date,
     t0 = time.time()
 
     parts = []
-    for i, ch in enumerate(chunks):
+    for i, (bed, ch) in enumerate(chunks):
         if progress:
             progress(i / (len(chunks) + 1), f"LLM: partea {i + 1}/{len(chunks)}")
+        focus = FOCUS_BED.format(bed=bed) if bed else ""
         part, st = llm.chat_json(system, MAP_PROMPT.format(
-            transcript=render_transcript(ch), part=i + 1, parts=len(chunks), **common), MAP_SCHEMA)
+            transcript=render_transcript(ch), part=i + 1, parts=len(chunks), focus=focus, **common), MAP_SCHEMA)
         stats["calls"].append(st)
+        for tp in part.get("topics", []):
+            tp["part"] = i  # rezumatul păstrează o singură situație per pacient și per bucată
         for key in ("decisions", "action_items", "verification_notes"):
             part[key] = [x for x in part.get(key, []) if verify_evidence(x, ch)[0] >= 55]
         parts.append(part)
@@ -481,10 +558,14 @@ def generate_mom(segments: list[dict], meeting_type: str, meeting_date: dt.date,
         "subjects": sorted({x.get("subject") for k in ("topics", "decisions", "action_items") for x in mom[k]
                             if x.get("subject")}),
     }
+    schema = json.loads(json.dumps(SUMMARY_SCHEMA))
+    schema["properties"]["meeting_type"] = {"type": "string", "enum": list(cfg.meeting_types)}
     summ, st = llm.chat_json(system, SUMMARY_PROMPT.format(
-        extracts=json.dumps(compact, ensure_ascii=False, indent=0), out_lang=LANG_NAMES[out_lang], **common), SUMMARY_SCHEMA)
+        extracts=json.dumps(compact, ensure_ascii=False, indent=0), out_lang=LANG_NAMES[out_lang],
+        type_choices=type_choices, **common), schema)
     stats["calls"].append(st)
-    mom.update({k: summ.get(k) for k in ("title", "summary", "topics", "open_issues", "next_meeting")})
+    # subiectele rămân cele extrase direct din transcriere (etapa map): o a doua rescriere pierde valori și doze
+    mom.update({k: summ.get(k) for k in ("title", "summary", "meeting_type", "open_issues", "next_meeting")})
 
     mom = postprocess(mom, turns, speakers, meeting_date)
     mom["language"] = out_lang
@@ -501,7 +582,7 @@ def translate_mom(mom: dict, lang: str) -> dict:
     llm = Ollama()
     keep = ("evidence_quote", "evidence_score", "verified", "timestamp", "source_speaker", "source_langs",
             "deadline_date", "id", "owner_speaker", "priority", "speaker", "uncertain_terms", "subject_key",
-            "subject_kind")
+            "subject_kind", "part")
     payload = {k: mom[k] for k in MOM_SCHEMA["properties"] if k in mom}
     system = f"Ești traducător medical profesionist (română, rusă, engleză). Răspunzi doar în limba {LANG_NAMES[lang]}."
     out, _ = llm.chat_json(system, TRANSLATE_PROMPT.format(out_lang=LANG_NAMES[lang],

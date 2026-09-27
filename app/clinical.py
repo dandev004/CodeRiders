@@ -188,3 +188,51 @@ def bed_of(*texts: str | None) -> str | None:
 
 def is_patient(text: str | None) -> bool:
     return bool(text and (_PAT_WORD.search(text) or _BED.search(text)))
+
+
+# ------------------------------------------------------------------------------------------------
+# Unități de măsură: rămân doar dacă au fost rostite în ședință
+# ------------------------------------------------------------------------------------------------
+
+# (unitatea în textul LLM-ului, formele în care ar apărea în transcriere dacă a fost rostită)
+UNITS = [
+    (r"mm ?Hg", ["mmhg", "milimetr", "мм рт", "ртутн"]),
+    (r"(?:mg|g)/dL", ["decilitr", "/dl", "децилитр"]),
+    (r"(?:µ|μ|u)mol/L", ["micromol", "µmol", "umol", "мкмоль"]),
+    (r"mmol/L", ["milimol", "mmol", "ммоль"]),
+    (r"(?:mcg|µg|μg)/kg/min", ["microgram", "mcg", "gama", "gamma", "мкг", "гамм"]),
+    (r"mg/kg(?:/(?:zi|h|oră))?", ["pe kilogram", "mg/kg", "на кило", "мг/кг"]),
+    (r"g/L", ["grame pe litru", "g/l", "г/л"]),
+    (r"mg/(?:min|h|oră)", ["mg/", "miligram", "мг/"]),
+    (r"ml/(?:h|oră|kg)", ["ml/", "mililitr", "мл/"]),
+    (r"mg", ["miligram", " mg", "мг", "милиграм"]),
+    (r"ml", ["mililitr", " ml", "мл", "миллилитр"]),
+    (r"UI", ["unități", "unitati", " ui ", "единиц", " ед"]),
+]
+_UNITS = [(re.compile(rf"\s*\b{u}(?![\w/])", re.IGNORECASE), spoken) for u, spoken in UNITS]
+
+
+def strip_unspoken_units(text: str | None, transcript: str) -> str | None:
+    """Scoate unitățile adăugate de LLM care nu apar nicăieri în ședință („TA 80/40 mmHg” -> „TA 80/40”)."""
+    if not text:
+        return text
+    low = transcript.lower()
+    for rx, spoken in _UNITS:
+        if not any(w in low for w in spoken):
+            text = rx.sub("", text)
+    return text
+
+
+def bed_timeline(turns: list[dict]) -> list[tuple[float, str]]:
+    """(momentul, patul) pentru fiecare pat rostit — la consiliu pacienții se discută pe rând."""
+    return [(t["start"], m.group(1)) for t in turns for m in _BED.finditer(t.get("text") or "")]
+
+
+def bed_at(timeline: list[tuple[float, str]], t: float) -> str | None:
+    """Patul discutat la momentul t: ultimul pat rostit până atunci."""
+    cur = None
+    for ts, bed in timeline:
+        if ts > t + 1:
+            break
+        cur = bed
+    return cur

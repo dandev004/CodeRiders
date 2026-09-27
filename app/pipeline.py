@@ -126,7 +126,8 @@ def _run(job: Job) -> None:
 
     # 2. ASR hibrid RO/RU/EN
     job.stage("asr", 0.0, "încărcare model")
-    segs, astats = asr.transcribe(audio_asr, job["meeting_type"], vad_audio=audio_clean,
+    auto_type = job["meeting_type"] not in cfg.meeting_types  # „auto”: promptul ASR folosește tot glosarul
+    segs, astats = asr.transcribe(audio_asr, None if auto_type else job["meeting_type"], vad_audio=audio_clean,
                                   progress=lambda p, m: job.stage("asr", p, m), profile=job.get("asr_profile"))
     if not segs:
         raise RuntimeError("Nu s-a detectat vorbire în înregistrare.")
@@ -169,6 +170,10 @@ def _run(job: Job) -> None:
     job.stage("llm", 0.0, "analiză")
     mom, lstats = llm.generate_mom(seg_dicts, job["meeting_type"], dt.date.fromisoformat(job["meeting_date"]),
                                    speakers, job["duration_s"], progress=lambda p, m: job.stage("llm", p, m))
+    if auto_type:  # tipul detectat de LLM decide rutarea n8n și lista de distribuție
+        job["meeting_type"] = mom.get("meeting_type") if mom.get("meeting_type") in cfg.meeting_types \
+            else next(iter(cfg.meeting_types))
+        job["meeting_type_detected"] = True
     (job.dir / f"mom.{mom['language']}.json").write_text(json.dumps(mom, ensure_ascii=False, indent=1), encoding="utf-8")
     job["title"] = mom.get("title")
     job["counts"] = {"decisions": sum(len(x) for _, x in report.decision_groups(mom, mom["language"])),

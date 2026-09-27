@@ -101,7 +101,8 @@ def participants_line(mom: dict) -> str:
     return "; ".join(out)
 
 
-_SPEC = re.compile(r"\s*\((?:probabil|posibil|likely|possibly|вероятно|возможно)[^)]*\)", re.IGNORECASE)
+_SPEC = re.compile(r"\s*\((?:probabil|posibil|likely|possibly|вероятно|возможно|(?:în )?transcrierea?\b|"
+                   r"in the transcript|в стенограмме)[^)]*(?:\)|$)", re.IGNORECASE)
 
 
 def _clean(x: str | None) -> str:
@@ -113,24 +114,33 @@ def _cap(x: str) -> str:
     return x[:1].upper() + x[1:] if x else x
 
 
+def _labels(it: dict, lang: str) -> tuple[str, str, str, str]:
+    """(cheie, tip, etichetă lungă „Pacient — Patul 8”, etichetă scurtă „Patul 8”) pentru subiectul unui element."""
+    t = L[lang]
+    k = it.get("subject_key") or "general"
+    kind = it.get("subject_kind") or "theme"
+    if k.startswith("bed:"):
+        return k, kind, t["bed_long"].format(n=k[4:]), t["bed"].format(n=k[4:])
+    if k == "general":
+        return k, kind, t["general"], ""
+    short = _cap((it.get("subject") or it.get("title") or k[4:]).strip())
+    label = short if kind != "patient" or short.lower().startswith(t["patient"].lower()) else f"{t['patient']} — {short}"
+    return k, kind, label, short
+
+
+def _order(b: dict) -> tuple:
+    """Pacienții întâi (în ordinea discuției), apoi temele, la final discuția generală."""
+    return b["key"] == "general", b["kind"] != "patient", b["t"]
+
+
 def subject_blocks(mom: dict, lang: str) -> list[dict]:
     """Subiectele ședinței în ordinea discuției — pacienții (după pat), apoi temele — cu deciziile și sarcinile lor."""
-    t = L[lang]
     blocks: dict[str, dict] = {}
 
     def block(it: dict) -> dict:
-        k = it.get("subject_key") or "general"
+        k, kind, label, short = _labels(it, lang)
         b = blocks.get(k)
         if b is None:
-            kind = it.get("subject_kind") or "theme"
-            if k.startswith("bed:"):
-                label, short = t["bed_long"].format(n=k[4:]), t["bed"].format(n=k[4:])
-            elif k == "general":
-                label, short = t["general"], ""
-            else:
-                short = _cap((it.get("subject") or it.get("title") or k[4:]).strip())
-                label = short if kind != "patient" or short.lower().startswith(t["patient"].lower()) \
-                    else f"{t['patient']} — {short}"
             b = blocks[k] = {"key": k, "kind": kind, "label": label, "short": short, "t": 10 ** 9,
                              "decisions": [], "plan": []}
         b["t"] = min(b["t"], _ts_seconds(it.get("timestamp")) or 0)
@@ -149,7 +159,31 @@ def subject_blocks(mom: dict, lang: str) -> list[dict]:
     for a in plan_all:
         block(a)["plan"].append(a)
     out = [b for b in blocks.values() if b["decisions"] or b["plan"]]
-    return sorted(out, key=lambda b: (b["key"] == "general", b["kind"] != "patient", b["t"]))
+    return sorted(out, key=_order)
+
+
+def summary_items(mom: dict, lang: str) -> list[tuple[str, str]]:
+    """Rezumatul: când s-au discutat pacienți, starea fiecăruia (parametri, evoluție, tratament), grupată după pat;
+    altfel rezumatul general al ședinței. Lista de (etichetă, text); eticheta e goală pentru rezumatul general."""
+    topics = [tp for tp in mom.get("topics", []) if (tp.get("summary") or "").strip()]
+    if not any(tp.get("subject_kind") == "patient" for tp in topics):
+        s = mom.get("summary") or " ".join(tp.get("summary") or "" for tp in topics)
+        return [("", _clean(s))] if s.strip() else []
+    # LLM-ul mai scrie pentru același pacient și „situații” repetate (sarcini, confuzii): din fiecare bucată a
+    # transcrierii rămâne doar cea mai completă situație clinică a pacientului
+    best: dict[tuple, dict] = {}
+    for tp in topics:
+        k = tp.get("subject_key") or "general"
+        cur = best.get((k, tp.get("part")))
+        if cur is None or len(tp.get("summary") or "") > len(cur.get("summary") or ""):
+            best[(k, tp.get("part"))] = tp
+    groups: dict[str, dict] = {}
+    for tp in sorted(best.values(), key=lambda x: _ts_seconds(x.get("timestamp")) or 0):
+        k, kind, _, short = _labels(tp, lang)
+        g = groups.setdefault(k, {"key": k, "kind": kind, "short": short, "t": 10 ** 9, "texts": []})
+        g["t"] = min(g["t"], _ts_seconds(tp.get("timestamp")) or 0)
+        g["texts"].append(_clean(tp.get("summary")))
+    return [(g["short"] or L[lang]["general"], " ".join(g["texts"])) for g in sorted(groups.values(), key=_order)]
 
 
 def decision_groups(mom: dict, lang: str) -> list[tuple[str | None, list[dict]]]:
@@ -207,7 +241,7 @@ h1{font-size:23px;line-height:1.28;margin:6px 0 12px;color:#0d1b2e}
 .meta b{color:#1f2a3a;font-weight:600}
 h2{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#0b5394;margin:26px 0 8px}
 h3{font-size:14.5px;margin:14px 0 2px;color:#1f2a3a}
-p,li,td{font-size:14.5px;line-height:1.55} p{margin:4px 0}
+p,li,td{font-size:14.5px;line-height:1.55} p{margin:4px 0} p.sum{margin:0 0 10px}
 ol{margin:4px 0 0;padding-left:24px} li{margin:5px 0;padding-left:2px}
 table{width:100%;border-collapse:collapse;margin-top:2px}
 th{font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:#6b7587;text-align:left;font-weight:700;
@@ -251,9 +285,12 @@ def render_html(mom: dict, job: dict, lang: str) -> str:
                 f"<li>[{_e(x.get('t'))}] {('<b>' + html.escape(x['subject']) + '</b>: ') if x.get('subject') else ''}"
                 f"{_e(x['text'])}</li>" for x in rv) + "</ul></div>")
 
-    summary = mom.get("summary") or " ".join(tp.get("summary") or "" for tp in mom.get("topics", []))
-    if summary.strip():
-        h.append(f"<h2>{t['summary']}</h2><p>{_rich_html(summary, lang)}</p>")
+    items = summary_items(mom, lang)
+    if items:
+        h.append(f"<h2>{t['summary']}</h2>")
+        for label, text in items:
+            tag = f"<span class='subj'>{html.escape(label)}</span>" if label else ""
+            h.append(f"<p class='sum'>{tag}{_rich_html(text, lang)}</p>")
 
     h.append(f"<h2>{t['decisions']}</h2>")
     groups = decision_groups(mom, lang)
@@ -340,10 +377,15 @@ def render_docx(mom: dict, job: dict, lang: str, path: Path) -> Path:
                     p.add_run(f"{x['subject']}: ").bold = True
                 p.add_run(x["text"])
 
-    summary = mom.get("summary") or " ".join(tp.get("summary") or "" for tp in mom.get("topics", []))
-    if summary.strip():
+    items = summary_items(mom, lang)
+    if items:
         section(t["summary"])
-        rich(doc.add_paragraph(), summary)
+        for label, text in items:
+            p = doc.add_paragraph()
+            if label:
+                r = p.add_run(f"{label} · ")
+                r.bold, r.font.color.rgb = True, blue
+            rich(p, text)
 
     section(t["decisions"])
     groups = decision_groups(mom, lang)
@@ -410,9 +452,9 @@ def render_markdown(mom: dict, job: dict, lang: str) -> str:
         if rv:
             out += ["", f"### {REVIEW[lang]['title']}"] + [
                 f"- [{x.get('t')}] {x['subject'] + ': ' if x.get('subject') else ''}{x['text']}" for x in rv]
-    summary = mom.get("summary") or " ".join(tp.get("summary") or "" for tp in mom.get("topics", []))
-    if summary.strip():
-        out += ["", f"## {t['summary']}", md(summary)]
+    items = summary_items(mom, lang)
+    if items:
+        out += ["", f"## {t['summary']}"] + [f"- **{label}** · {md(text)}" if label else md(text) for label, text in items]
     out += ["", f"## {t['decisions']}"]
     groups = decision_groups(mom, lang)
     n = 1

@@ -128,6 +128,8 @@ LLM-ul local ([app/llm.py](app/llm.py)) primește transcrierea cu marcaje de tim
 - **sarcini** (responsabil, termen, prioritate);
 - participanți, subiecte, probleme deschise, ședința următoare.
 
+**Pacientul corect:** transcrierea e împărțită pe pacienți după „patul N” rostit, iar LLM-ul primește **câte un apel pentru fiecare pacient** (discuțiile scurte vecine se unesc). Astfel nu mută valori între pacienți și nu scapă detaliile unui caz lung, ca Hb, lactatul sau transfuzia. Fiecare decizie/sarcină primește patul discutat la momentul citatului-dovadă. La consiliu pacienții se iau pe rând; LLM-ul nu mai mută o transfuzie de la un pacient la altul. Unitățile de măsură adăugate de LLM și nerostite în ședință (mmHg, mg/dL, mcg/kg/min…) sunt eliminate.
+
 **Garanții împotriva invențiilor:**
 - Fiecare decizie sau sarcină are un **citat-dovadă copiat din transcriere**, verificat fuzzy în Python. Ce nu se regăsește în transcriere e eliminat; ce se potrivește parțial e marcat „de verificat”.
 - **Termenele** se trec doar dacă au fost rostite. Termenele relative („până vineri”) sunt convertite la dată calendaristică față de data ședinței și validate. Termenele „deduse” sau „standard” sunt respinse automat.
@@ -147,7 +149,7 @@ Transcrierea **nu** intră în document. Formatarea clinică ([app/clinical.py](
 
 Interfața e gândită pentru medici: minimalistă, fără detalii tehnice. Medicul face trei pași:
 1. trage fișierul în pagină sau apasă **Înregistrați ședința**;
-2. alege tipul ședinței și limba documentului;
+2. alege limba documentului (tipul ședinței — medical / executiv / administrativ — e detectat automat de LLM din conținut și decide rutarea n8n);
 3. apasă **Generează procesul-verbal**.
 
 În timpul procesării apare o singură bară de progres (0–100%) și timpul scurs, fără etapele interne. La final:

@@ -29,7 +29,7 @@ const STATUS = { queued: "în așteptare", running: "în lucru", error: "eroare"
 const MONTHS = ["ian", "feb", "mar", "apr", "mai", "iun", "iul", "aug", "sep", "oct", "nov", "dec"];
 const START_LABEL = `Generează procesul-verbal ${svg("arrow", 18)}`;
 
-let CFG = null, view = null, blob = null, blobName = null, meetingType = "medical", docLang = "ro";
+let CFG = null, view = null, blob = null, blobName = null, docLang = "ro";
 let currentJob = null, lastJob = null, resultLang = null, pollTimer = null;
 const prog = { shown: 0, target: 0, ceil: 0, done: false, start: 0, timer: null };
 
@@ -45,11 +45,6 @@ async function init() {
   $("#start").innerHTML = START_LABEL;
 
   CFG = await (await fetch("/api/config")).json();
-  $("#types").innerHTML = Object.entries(CFG.meeting_types).map(([k, v]) =>
-    `<button type="button" data-k="${k}">${svg(k, 17)}<span>${esc(v.ro)}</span></button>`).join("");
-  $$("#types button").forEach((b) => (b.onclick = () => selectType(b.dataset.k)));
-  selectType(CFG.meeting_types.medical ? "medical" : Object.keys(CFG.meeting_types)[0]);
-
   docLang = CFG.default_language;
   $("#langs").innerHTML = Object.entries(CFG.languages).map(([k, v]) => `<button type="button" data-l="${k}">${esc(v)}</button>`).join("");
   $$("#langs button").forEach((b) => (b.onclick = () => selectLang(b.dataset.l)));
@@ -65,10 +60,6 @@ async function init() {
   route();
 }
 
-function selectType(k) {
-  meetingType = k;
-  $$("#types button").forEach((b) => b.classList.toggle("active", b.dataset.k === k));
-}
 function selectLang(l) {
   docLang = l;
   $$("#langs button").forEach((b) => b.classList.toggle("active", b.dataset.l === l));
@@ -186,7 +177,6 @@ $("#start").onclick = () => {
   b.innerHTML = `<i class="spin"></i> Se încarcă…`;
   const fd = new FormData();
   fd.append("file", blob, blobName);
-  fd.append("meeting_type", meetingType);
   fd.append("output_language", docLang);
   fd.append("meeting_date", $("#date").value);
   const xhr = new XMLHttpRequest();
@@ -258,7 +248,7 @@ function renderProgress(j) {
   prog.target = Math.max(prog.target, o.target);
   prog.ceil = o.ceil;
   if (!prog.timer) prog.timer = setInterval(tickProgress, 100);
-  $("#p-kicker").textContent = CFG.meeting_types[j.meeting_type]?.ro || "";
+  $("#p-kicker").textContent = typeName(j.meeting_type);
   $("#p-file").textContent = j.source_name || "";
   const failed = j.status === "error";
   $("#view-progress .panel").classList.toggle("failed", failed);
@@ -304,7 +294,7 @@ function showResult(j) {
   lastJob = j;
   show("result");
   resultLang = resultLang || j.output_language;
-  $("#r-meta").textContent = [CFG.meeting_types[j.meeting_type]?.ro || j.meeting_type, fmtDate(j.meeting_date),
+  $("#r-meta").textContent = [typeName(j.meeting_type), fmtDate(j.meeting_date),
     j.duration_s ? durText(j.duration_s) : ""].filter(Boolean).join(" · ");
   renderSent(j);
   $("#r-langs").innerHTML = Object.entries(CFG.languages).map(([k, v]) =>
@@ -403,7 +393,7 @@ async function loadHistory() {
     return `<a class="item" href="#job/${encodeURIComponent(j.id)}">
       <div class="date"><b>${d ? +d : ""}</b><span>${m ? MONTHS[+m - 1] : ""}</span></div>
       <div class="body"><div class="t">${esc(j.title || j.source_name)}</div>
-        <div class="m"><span class="tag ${esc(j.meeting_type)}">${esc(CFG.meeting_types[j.meeting_type]?.ro || j.meeting_type)}</span>${esc(meta)}</div></div>
+        <div class="m"><span class="tag ${esc(j.meeting_type)}">${esc(typeName(j.meeting_type))}</span>${esc(meta)}</div></div>
       ${j.status !== "done" ? `<span class="st ${esc(j.status)}">${STATUS[j.status] || esc(j.status)}</span>` : ""}
       <span class="chev">${svg("chev", 18)}</span></a>`;
   }).join("");
@@ -419,6 +409,8 @@ function durText(sec) {
   const m = Math.max(1, Math.round(sec / 60));
   return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${m % 60} min`;
 }
+// tipul ședinței e detectat automat din conținut; până atunci „Ședință”
+function typeName(t) { return CFG.meeting_types[t]?.ro || "Ședință"; }
 function fmtDate(iso) { const p = (iso || "").split("-"); return p.length === 3 ? `${p[2]}.${p[1]}.${p[0]}` : iso || ""; }
 function plural(n, one, many) { return `${n} ${n === 1 ? one : many}`; }
 function esc(s) { return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]); }
