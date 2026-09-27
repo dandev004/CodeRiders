@@ -1,0 +1,26 @@
+# Secure MOM — dependențe Python (Python 3.11)
+fastapi==0.141.1
+uvicorn[standard]==0.54.0
+python-multipart==0.0.32
+httpx==0.28.1
+PyYAML==6.0.3
+numpy==2.4.6
+scipy==1.17.1
+soundfile==0.14.0
+noisereduce==3.0.3
+RapidFuzz==3.14.6
+python-docx==1.2.0
+scikit-learn==1.9.1
+# ASR: faster-whisper (server CUDA / CPU) + MLX (Apple Silicon)
+faster-whisper==1.2.1
+ctranslate2==4.8.2
+mlx==0.32.2; sys_platform == "darwin" and platform_machine == "arm64"
+mlx-whisper==0.4.3; sys_platform == "darwin" and platform_machine == "arm64"
+# diarizare
+torch==2.5.1
+torchaudio==2.5.1
+speechbrain==1.0.3
+# dezvoltare / evaluare (doar în faza de pregătire)
+huggingface_hub==1.33.0
+jiwer==4.0.0
+pyarrow==25.0.1

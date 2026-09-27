@@ -1,0 +1,80 @@
+[07:55] verificare dus-întors (1281 clipuri) + set de test cu voci nevăzute (50), în paralel
+15 clipuri de referință, 5 vorbitori
+1 noi (1/50), 0.1 min audio, RTF 2.82, 0.3 min, RAM vârf 5.0G, MPS 4.2G
+2 noi (2/50), 0.3 min audio, RTF 2.20, 0.7 min, RAM vârf 5.0G, MPS 4.2G
+3 noi (3/50), 0.5 min audio, RTF 1.92, 1.0 min, RAM vârf 5.0G, MPS 4.2G
+100 verificate, 88 păstrate (88%), 1.7 min
+200 verificate, 176 păstrate (88%), 3.7 min
+300 verificate, 263 păstrate (88%), 5.3 min
+400 verificate, 354 păstrate (88%), 7.3 min
+500 verificate, 441 păstrate (88%), 9.1 min
+25 noi (25/50), 4.9 min audio, RTF 1.90, 9.3 min, RAM vârf 5.0G, MPS 4.2G
+600 verificate, 532 păstrate (89%), 11.4 min
+700 verificate, 625 păstrate (89%), 12.9 min
+800 verificate, 716 păstrate (90%), 14.2 min
+900 verificate, 806 păstrate (90%), 15.9 min
+1000 verificate, 896 păstrate (90%), 17.3 min
+1100 verificate, 983 păstrate (89%), 18.8 min
+1200 verificate, 1070 păstrate (89%), 20.4 min
+{"total": 1281, "keep": 1146, "median_cer": {"ro": 0.087, "ru": 0.0, "en": 0.0}}
+50 noi (50/50), 10.5 min audio, RTF 2.07, 21.8 min, RAM vârf 5.0G, MPS 4.2G
+gata: 50 fraze noi -> data/tts_test
+[08:18] filtru gata: 1146/1281 păstrate; test: 50
+[08:18] antrenare (3 epoci, 1500 clipuri reale)
+parametri antrenați: 183.7M (decoder + ultimele 4 straturi ale encoderului)
+date: {'xtts': 1146, 'mac': 0, 'real': 1498}, voci de fundal: 392
+val loss inițial: 1.096 (120 clipuri, cu augmentare fixă)
+ep 1 pas 1/471 loss 1.300 10.9s/pas vârf 9.7G
+ep 1 pas 2/471 loss 1.298 11.1s/pas vârf 11.7G
+ep 1 pas 3/471 loss 1.112 10.2s/pas vârf 11.7G
+ep 1 pas 25/471 loss 0.761 11.7s/pas vârf 11.9G
+ep 1 pas 50/471 loss 0.595 12.4s/pas vârf 11.9G
+ep 1 pas 75/471 loss 0.536 14.1s/pas vârf 12.1G
+ep 1 pas 100/471 loss 0.524 12.9s/pas vârf 12.1G
+ep 1 pas 125/471 loss 0.470 12.7s/pas vârf 12.1G
+ep 1 pas 150/471 loss 0.499 13.9s/pas vârf 12.1G
+== epoca 1: val loss 0.478 (35 min)
+salvat (val 0.478) -> /Users/crivoidan/Desktop/secure_mom/models/mlx-whisper-turbo-moldovan-med2
+ep 2 pas 175/471 loss 0.387 15.3s/pas vârf 12.1G
+ep 2 pas 200/471 loss 0.326 14.0s/pas vârf 12.1G
+ep 2 pas 225/471 loss 0.330 13.4s/pas vârf 12.1G
+ep 2 pas 250/471 loss 0.302 12.5s/pas vârf 12.1G
+ep 2 pas 275/471 loss 0.313 13.2s/pas vârf 12.1G
+ep 2 pas 300/471 loss 0.289 13.6s/pas vârf 12.1G
+== epoca 2: val loss 0.410 (70 min)
+salvat (val 0.410) -> /Users/crivoidan/Desktop/secure_mom/models/mlx-whisper-turbo-moldovan-med2
+ep 3 pas 325/471 loss 0.300 15.6s/pas vârf 12.1G
+ep 3 pas 350/471 loss 0.252 14.0s/pas vârf 12.1G
+ep 3 pas 375/471 loss 0.284 13.5s/pas vârf 12.1G
+ep 3 pas 400/471 loss 0.273 13.5s/pas vârf 12.1G
+ep 3 pas 425/471 loss 0.225 13.2s/pas vârf 12.1G
+ep 3 pas 450/471 loss 0.236 13.9s/pas vârf 12.1G
+== epoca 3: val loss 0.397 (107 min)
+salvat (val 0.397) -> /Users/crivoidan/Desktop/secure_mom/models/mlx-whisper-turbo-moldovan-med2
+cel mai bun val loss 0.397 -> /Users/crivoidan/Desktop/secure_mom/models/mlx-whisper-turbo-moldovan-med2
+[10:05] evaluare Medpark
+{"model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan-med2", "tag": "med2", "set": [], "medical_correction": false, "WER": 52.3, "CER": 29.9, "medical_term_recall": 77.3, "missing_terms": ["tromboaspirația", "stentat", "Dobutamină", "anemică", "pungă de sânge"], "seconds": 10.1, "lang_seconds": {"ro": 152.5, "ru": 0.0, "en": 0.0}}
+   HYP: Pacientul patul 8, el a fost pe data de uscăre, ceftarabia a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3 cu fracție de 3,40. da, e un pacient? cardiac și trivascular, nu? trivascular, da, deci acolo suspecția și la ruptura de cordaj a fost. Care nu-i prea a fost confirmat, e alostatul nu-i până la data 18, pe 18 transferat cu dozele mici de noradrenalină. винист primește o fost transferat pe secție. A fost despertat în continuu, destul de activ. el o fost îmi pare că nu se vede din ori. la momentul de transfer da să văd. La momentul de transfer, nu-i? da, 2 pe ș
+   HYP: Deci noi și-am ajustat spumește antibioticul, am scănat-o acum, vedem mai departe cu urologul și tactica dacă ești de intervenit. de intervenit de spintat sau de pus nefrostomă, depinde ce... Da, clinică e acum evoluie asta? clinic din momentul când am schimbat frecvența la ecăr la 80, mărită frecvență, noi deja suntem în redușie a dozezele de noradrenalină și de 2, dobuie noi avem asci vor 80 ultimul echilibru și... Norul, noi am scăzut deja undeva la 1 008007, trebuie recălcțit la 08 tiranța, nu-i? 00000 dinamica on-trică este pozitivă pe fondul acesta, e anemica, 86 hemoglobină, amu și o să
+[10:05] evaluare test voci nevăzute (actual vs nou)
+curat {"WER_latin": 38.7, "WER_chirilic": 109.2, "numere_exacte": "22/25", "numere_pct": 88.0, "termeni_critici": "34/60", "termeni_pct": 56.7, "seconds": 37.5}
+sala {"WER_latin": 58.5, "WER_chirilic": 100.0, "numere_exacte": "18/25", "numere_pct": 72.0, "termeni_critici": "28/60", "termeni_pct": 46.7, "seconds": 40.9}
+curat {"WER_latin": 21.1, "WER_chirilic": 40.0, "numere_exacte": "22/25", "numere_pct": 88.0, "termeni_critici": "44/60", "termeni_pct": 73.3, "seconds": 39.0}
+sala {"WER_latin": 40.5, "WER_chirilic": 141.5, "numere_exacte": "21/25", "numere_pct": 84.0, "termeni_critici": "34/60", "termeni_pct": 56.7, "seconds": 58.9}
+[10:08] evaluare code-switching
+{"model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan-med2", "WER": {"ro": 0.0, "ru": 21.9, "en": 0.0, "mixed": 40.0}, "language_detected_correctly": "7/8"}
+   [ro] Pacientul de pe patul 4 primește meropenem și amikacină de mâine dimineață.
+   [ru] Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу
+   [ro] Okay, let's schedule the follow-up for next week and check the troponin levels.
+   [ru] Сатурация 92%, давление 80 на 40.
+   [ro] Doamna doctor rusu discută cu familia până joi despre nefrostomă.
+   [ru] Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.
+   [ro] Deci i-am hotărât că pacientul e dotnă-i pirat siu zahftra utrem.
+   [ro] Hemoglobina a scăzut la 86, am comandat o pungă de sânge.
+   [ro] Facem ecocardiografie și... the ejection fraction is around forty percent.
+   [ru] Посев крови положительный, клебсиелла чувствительно к меропениму.
+[10:09] evaluare dialect
+150 fraze, 17.8 min audio
+{"model": "mlx-whisper-turbo-moldovan-med2", "role": "ro", "languages": "ro", "prompt": true, "n": 150, "WER": 3.8, "CER": 2.35, "WER_no_digits": 1.19, "ro_as_other_lang": 0, "seconds": 128.8, "rtf": 0.12}
+{"model": "mlx-whisper-turbo-moldovan-med2", "role": "ro", "languages": "ro+ru+en", "prompt": true, "n": 150, "WER": 3.8, "CER": 2.35, "WER_no_digits": 1.19, "ro_as_other_lang": 0, "seconds": 101.1, "rtf": 0.095}
+[10:12] GATA

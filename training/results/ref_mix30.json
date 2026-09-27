@@ -1,0 +1,29 @@
+[
+ {
+  "model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan-mix30",
+  "tag": "mix30",
+  "set": [],
+  "medical_correction": false,
+  "WER": 48.9,
+  "CER": 26.5,
+  "medical_term_recall": 72.7,
+  "missing_terms": [
+   "tromboaspirația",
+   "cordaj",
+   "stentat",
+   "Dobutamină",
+   "anemică",
+   "pungă de sânge"
+  ],
+  "seconds": 23.3,
+  "lang_seconds": {
+   "ro": 152.5,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul patul 8, el a fost pe data de 11 a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3 cu fracție de 3,40. da, eul e pacient cardiac, ciacolocardiac și trivascular, nu? trivascular, da, ciacolosuspecția și la ruptura de cordaș a fost. Care nu a fost confirmat, ea o stată numai până la data 18, pe 18 transferat cu dozele mici de noradrenalină, vine se primește o fără transferată secție. A fost despertat în continuu destul de activ. el a fost în care atunci se vrea din ori, la momentul de transfer a sau. La momentul de transfer dacrog de 69, el a rău 80 de nor, așa, hemodinamic instabil norul 001, doar 2 micropleri, el cea a avută aceste 7. Așa, transferat acolo, acolo în continuă el a fost descărcat volemic și acuma a ajuns pe motivul de instabilitate hemodinamică, căci sundele 80 pe 40, dozele de 0,20 de nord și dobuiect. 44 S-a făcut eco, el e gol, și dreapta și stângă, stângă dacă nu putem să considerăm pe motiv de mitrală care scapă, dreapta e golul sănă-i dea volumul acuma, și el deja încet și or să restabilește tensiunea. Ultima discusiune a consultor...",
+   "Deci noi și-am ajustat spremește antibioticul, am scănat-o acum vedem mai departe cu urologul și tactica, dacă ești de intervenit. de intervenit, de spintat sau de pus nefrostomă, depinde ce... Clinică e acum evoluioasă? clinic din momentul când am schimbat frecvența la xx la 80 mărită frecvență, noi deja suntem în redușie a doze de ori de ori de ilină și de 2, dobul noi avem ascivă doar 80 ultimul echilibru, și... Norul noi am scăzut deja undeva la 1 008007, trebuie recălculat, 08 tiranță amikul 0000000 dinamica unui pic este pozitivă pe faptul acesta, anemica, 86 hemoglobină, am comandat o plumbă de sânge amușor să apară suplumbă așeea, lactatul a scăzut la 1 și 8. Deficitul minus 8 să menține. deci nu sunt deaptare agresiv cu asta a fost..."
+  ]
+ }
+]

@@ -1,0 +1,188 @@
+[
+ {
+  "model": "mlx-whisper-turbo-moldovan",
+  "WER": {
+   "ro": 12.1,
+   "ru": 125.0,
+   "en": 13.3,
+   "mixed": 45.0
+  },
+  "language_detected_correctly": "3/8",
+  "rows": [
+   {
+    "ref": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "hyp": "pacientul de pe patul patru primește meropenem și amica cină de mâine dimineața.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу.",
+    "hyp": "hărășo, ia zdela eu computernui tomografiu de pătniță și păzvani urologul.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Okay, let's schedule the follow-up for next week and check the troponin levels.",
+    "hyp": "ok, let's schedule the follow-up for next week and check the tropenin levels.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Сатурация девяносто два процента, давление восемьдесят на сорок.",
+    "hyp": "saturația devineu și doi la sută, давlenie 80 la sută.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Doamna doctor Rusu discută cu familia până joi despre nefrostomă.",
+    "hyp": "doamna doctor rusu discută cu familia până joi despre nefrostomă.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "hyp": "nujno să nizii dozul adrenalină și prodoljit antibiotico-terapia.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Deci am hotărât că pacientul идёт на операцию завтра утром.",
+    "hyp": "deci am hotărât că pacientul, idiot, n-ai pirațiu, zavtru utrăm.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Hemoglobina a scăzut la optzeci și șase, am comandat o pungă de sânge.",
+    "hyp": "femoglobina a scăzut la optzeci și șase, am comandat o pungă de sânge.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Facem ecocardiografie și the ejection fraction is around forty percent.",
+    "hyp": "facem ecocardiografie și, the injection fraction is around 40%.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Посев крови положительный, клебсиелла чувствительна к меропенему.",
+    "hyp": "pasev crăvii po-lojitilnîi, clepsiielu o-o, чувствitilnă k mirapenimu.",
+    "lang": "ro"
+   }
+  ]
+ },
+ {
+  "model": "mlx-whisper-large-v3",
+  "WER": {
+   "ro": 6.1,
+   "ru": 115.6,
+   "en": 100.0,
+   "mixed": 80.0
+  },
+  "language_detected_correctly": "4/8",
+  "rows": [
+   {
+    "ref": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "hyp": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу.",
+    "hyp": "Bine, voi face tomografia de computer până la dimineața viitoare și voi spune urologul.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Okay, let's schedule the follow-up for next week and check the troponin levels.",
+    "hyp": "Ok, să scrieți folosul pentru viitoare și să vedeți nivelurile troponului.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Сатурация девяносто два процента, давление восемьдесят на сорок.",
+    "hyp": "Saturație 92%, presiune 80% la 40%",
+    "lang": "ro"
+   },
+   {
+    "ref": "Doamna doctor Rusu discută cu familia până joi despre nefrostomă.",
+    "hyp": "Doamna Dr. Rusu discută cu familia până joi despre nefrostomă.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "hyp": "Trebuie să îmbunătățim doza de noradrenalină și să continuăm terapia de antibiotica.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Deci am hotărât că pacientul идёт на операцию завтра утром.",
+    "hyp": "Deci am vătărât că pacientul Idiot ne-a apirat să-i uzav trăutrăm",
+    "lang": "ro"
+   },
+   {
+    "ref": "Hemoglobina a scăzut la optzeci și șase, am comandat o pungă de sânge.",
+    "hyp": "Femoglobina a scăzut la 86, am comandat o pungă de sânge.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Facem ecocardiografie și the ejection fraction is around forty percent.",
+    "hyp": "Facem ecocardiografie și",
+    "lang": "ro"
+   },
+   {
+    "ref": "Посев крови положительный, клебсиелла чувствительна к меропенему.",
+    "hyp": "посев крови положительный, клепсиело-чувствительно к меропениуму.",
+    "lang": "ru"
+   }
+  ]
+ },
+ {
+  "model": "mlx-whisper-large-v3-turbo",
+  "WER": {
+   "ro": 3.0,
+   "ru": 21.9,
+   "en": 13.3,
+   "mixed": 45.0
+  },
+  "language_detected_correctly": "7/8",
+  "rows": [
+   {
+    "ref": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "hyp": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу.",
+    "hyp": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу",
+    "lang": "ru"
+   },
+   {
+    "ref": "Okay, let's schedule the follow-up for next week and check the troponin levels.",
+    "hyp": "Ok, let's schedule the follow-up for next week and check the tropanin levels",
+    "lang": "ro"
+   },
+   {
+    "ref": "Сатурация девяносто два процента, давление восемьдесят на сорок.",
+    "hyp": "сатурация 92%, давление 80 на 40.",
+    "lang": "ru"
+   },
+   {
+    "ref": "Doamna doctor Rusu discută cu familia până joi despre nefrostomă.",
+    "hyp": "Doamna doctor Rusu discută cu familia până joi despre nefrostomă.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "hyp": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "lang": "ru"
+   },
+   {
+    "ref": "Deci am hotărât că pacientul идёт на операцию завтра утром.",
+    "hyp": "Deci am hotărât că pacientul, idiot, ne apirați să eu zavtru, utrăm.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Hemoglobina a scăzut la optzeci și șase, am comandat o pungă de sânge.",
+    "hyp": "Femoglobina a scăzut la 86, am comandat o pungă de sânge.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Facem ecocardiografie și the ejection fraction is around forty percent.",
+    "hyp": "Facem ecocardiografie și The ejection fraction is around 40%.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Посев крови положительный, клебсиелла чувствительна к меропенему.",
+    "hyp": "посев крови положительный, клебсиелла чувствительно к меропениму.",
+    "lang": "ru"
+   }
+  ]
+ }
+]

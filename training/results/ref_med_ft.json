@@ -1,0 +1,28 @@
+[
+ {
+  "model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan-med",
+  "tag": "dual_med_ft",
+  "set": [],
+  "medical_correction": false,
+  "WER": 45.3,
+  "CER": 25.7,
+  "medical_term_recall": 77.3,
+  "missing_terms": [
+   "tromboaspirația",
+   "cordaj",
+   "stentat",
+   "Dobutamină",
+   "anemică"
+  ],
+  "seconds": 9.5,
+  "lang_seconds": {
+   "ro": 151.7,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul 48, el a fost pe data de 11 a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3 cu fracție de 38-40. da eul e pacient cardiac și trivascular, nu? trivascular, da, și acolo suspecția și la ruptura de cordaș a fost. Care nu a fost confirmat, ei a ostat unui până în data 18, pe 18 transferat cu dozele mici de noradrenalină, vine se primește o fără transferată secție. A fost despertat atât continuu destul de activ. el a fost în care atunci se vede din ori, la momentul de transfert asupra. La momentul de transfer dacrog de 69, el a rău 80 de nor, de nor, așa, hemodinamic instabil norul 001, 2, 2,2,2. Așa, transferat acolo, acolo în continuă el a fost descărcat volemic, și acuma a ajuns pe articol de instabilitate hemodinamică căci zonele 80 x 40, dozele de 0.22 de nord, și dobuiect... S-a făcut eco, el e gol, și dreapta și stângă, stângă dacă nu putem să considerăm pe motiv de mitrală care scapă, dreapta e golul sănă-i dea volumă acuma, și el deja încet și or să restabilește tensiunea. Ultima disfuncție a-s-foscut.",
+   "Deci noi și-a ajustat primește antibioticul, am scănat-o acum vedem mai departe cu urologul și tactica, dacă ești de intervenit – de intervenit – de știință sau de pus nefrostomă – după de c. Clinic de acum evoluioză? clinic din momentul când am schimbat frecvența la xs la 80 mărită frecvență, noi deja suntem în redușie a 12-11 de nord-relină și de 2, dobul noi avem ascivă doar 80 ultimul echilibru, și... Norul noi am scăzut deja undeva la un 0.08.0.0.7, după direcăltă a tiranța în timp 0.6, dinamica un pic este pozitivă pe fărul acesta, anemica, 86 hemoglobină, am comandat o pungă de sânge am ușor să apară suprungăție, lactatul a scăzut la 1.8, Deficitul minus 8 să menține. deci nu sunt deaptare agresiv cu asta a fost..."
+  ]
+ }
+]

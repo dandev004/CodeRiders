@@ -1,0 +1,65 @@
+[
+ {
+  "model": "mlx-whisper-large-v3",
+  "tag": "v3",
+  "set": [
+   "vad.max_segment_s=25"
+  ],
+  "medical_correction": false,
+  "WER": 65.8,
+  "CER": 44.2,
+  "medical_term_recall": 63.6,
+  "missing_terms": [
+   "tromboaspirația",
+   "fracție",
+   "cordaj",
+   "descărcat volemic",
+   "Eco",
+   "Dobutamină",
+   "hemoglobină",
+   "Deficitul"
+  ],
+  "seconds": 90.8,
+  "lang_seconds": {
+   "ro": 182.4,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul de pe patul 8, el a fost pe dată de uscări și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3, compracție de 38-40. Cardiac și trivascular. Și acolo suspecția și la ruptura de cordaș a fost. care nu prea poate conturna ATI, alustatul necandidată, voks, treci pe om, treci transferat cu dozile mici de noradrenalină. A fost descărcată cu un tip de studii activ? Elu Foscu, un parere care a fost înseamnă dinorși, la momentul de transfer de asemenea. Este obținut din nor. Din nor. Așa. De chemodinamic, stabil, norul 001, măi scuturmii, dou micrometri. El și același este și același. Așa, a transferat acolo, acolo în continuă el a fost dezcarcat volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunele 80 pe 40, dozile de 0,22 de nori și dobul e S-a făcut ieco, el e gol, și dreapta și stânga, stânga dacă putem să considerăm pe motiv diametrală care scapă, dreapta e golulță, noi dăm volumă acum și el deja încet ușor se restabilește tensiunea. Da, da, da. Da, da. Da, da. Da, da.",
+   "Deci noi și am ajustat, spre mers, cea antibiotică, am scănat o cuma, de mai departe cu urologul și tactica dacă este de intervenit De intervenit de stentat sau de pus nefrostomă, depinde ce Și de clinici cum e avut easa? De clinici, de moment, când noi am schimbat frecvența la EKS la 80 merită frecvență, noi deja suntem în răduşiă doi zi de noradrenalină și de dobu. Dobu noi avem azi ceva de 80 cu ultimul echilibru și Norul, noi am spus, deja era la 0,08-0,07 din calcule. Dinamică este pozitivă pe acest pion, anemică, 86 de hemoglobine, am comandat un pungă de sânge, am ușor să apară pungă de sânge, lactatul, am spus, la 1,8 Deci nu suntem tare agresivi cu asta. Dar oricum ai întors, mă infuzează între însă, nu? Da, da, da, se infuzează. Deci Transdoracec nu e mie informativ, a făcut Transsvajian. Deci Transsvajian cam tot nu prea ne explică. Este o insuficiență de gradul 2,"
+  ]
+ },
+ {
+  "model": "mlx-whisper-large-v3",
+  "tag": "v3",
+  "set": [
+   "vad.max_segment_s=25"
+  ],
+  "medical_correction": true,
+  "WER": 66.1,
+  "CER": 44.9,
+  "medical_term_recall": 59.1,
+  "missing_terms": [
+   "tromboaspirația",
+   "fracție",
+   "descărcat volemic",
+   "Eco",
+   "urologul",
+   "stentat",
+   "Dobutamină",
+   "anemică",
+   "Deficitul"
+  ],
+  "seconds": 2372.4,
+  "lang_seconds": {
+   "ro": 182.4,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul de pe patul 8, el a fost pe dată de ușoare și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3, compracție de 38-40. Cardiac și trivascular. Și acolo subită și la ruptura de cordajele a fost. care nu prea poate contura ATI, alprostadil cantitativă, voks, treci pe om, treci transferat cu dozile mici de noradrenalină. A fost descărcată cu un tip de studii activ? Elu Foscu, un parere care a fost înseamnă stenozei, la momentul de transfer de asemenea. Este obținut din nor. Din nor. Așa. De hemodinamică, stabil, norul 001, măi suturii, dou micrometri. El și același este și același. Așa, a transferat acolo, acolo în continuă el a fost descărcare volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunea 80 pe 40, acidozele de 0,22 de nori și dobul e S-a făcut ieco, el e gol, și dreapta și stânga, stânga dacă putem să considerăm pe motiv mitrală care scapă, dreapta e golulță, noi dăm volumă acum și el deja încet ușor se restabilește tensiunea. Da, da, da. Da, da. Da, da. Da, da.",
+   "Deci noi și am ajustat, spre mers, cea antibiotică, am scănat o cuma, de mai departe cu urolog și tactica dacă este de intervenit De intervenit de stentare sau de pus nefrostomă, depinde ce Și de clinici cum e avut easa? De clinici, de moment, când noi am schimbat frecvența la EKS la 80 merită frecvență, noi deja suntem în tusea doi zi de noradrenalină și de dobu. Dobu noi avem azi ceva de 80 cu ultimul echilibru și Norul, noi am spus, deja era la 0,08-0,07 din calcule. Dinamică este pozitivă pe acest pion, anemie, 86 de hemoglobină, am comandat un pungă de sânge, am ușor să apară pungă de sânge, lactatul, am spus, la 1,8 Deci nu suntem tare agresivi cu asta. Dar oricum ai întors, mă infuzează între însă, nu? Da, da, da, se infuzează. Deci transtoracice nu e mie informativ, a făcut transfuzie. Deci Transsvajian cam tot nu prea ne explică. Este o insuficiență de gradul 2,"
+  ]
+ }
+]

@@ -1,0 +1,72 @@
+[
+ {
+  "model": "mlx-whisper-turbo-moldovan-med2",
+  "role": "ro",
+  "languages": "ro",
+  "prompt": true,
+  "n": 150,
+  "WER": 3.8,
+  "CER": 2.35,
+  "WER_no_digits": 1.19,
+  "ro_as_other_lang": 0,
+  "seconds": 128.8,
+  "rtf": 0.12,
+  "examples": [
+   {
+    "ref": "a simțit o durere violentă la nivelul gambei piciorului",
+    "hyp": "a simțit o durere violentă la nivelul gambei piciorului"
+   },
+   {
+    "ref": "iar celulele acestuia sunt elementele figurate care alcătuiesc patruzeci patruzeci și cinci de procente",
+    "hyp": "iar celulele acestuia sunt elementele figurate care alcătuiesc 40 45 de procente"
+   },
+   {
+    "ref": "analizatorii pot fi clasificați ca organe ce recepționează excitanți mecanici",
+    "hyp": "analizatorii pot fi clasificați ca organe ce recepționează excitanți mecanici"
+   },
+   {
+    "ref": "la exterior o fibră musculară striată este acoperită de o membrană numită sarcolemă",
+    "hyp": "la exterior o fibră musculară striată este acoperită de o membrană numită sarcolemă"
+   },
+   {
+    "ref": "sunt receptori care se adaptează foarte ușor și sunt alții ce se adaptează mai dificil",
+    "hyp": "sunt receptori care se adaptează foarte ușor și sunt alții ce se adaptează mai dificil"
+   }
+  ]
+ },
+ {
+  "model": "mlx-whisper-turbo-moldovan-med2",
+  "role": "ro",
+  "languages": "ro+ru+en",
+  "prompt": true,
+  "n": 150,
+  "WER": 3.8,
+  "CER": 2.35,
+  "WER_no_digits": 1.19,
+  "ro_as_other_lang": 0,
+  "seconds": 101.1,
+  "rtf": 0.095,
+  "examples": [
+   {
+    "ref": "a simțit o durere violentă la nivelul gambei piciorului",
+    "hyp": "a simțit o durere violentă la nivelul gambei piciorului"
+   },
+   {
+    "ref": "iar celulele acestuia sunt elementele figurate care alcătuiesc patruzeci patruzeci și cinci de procente",
+    "hyp": "iar celulele acestuia sunt elementele figurate care alcătuiesc 40 45 de procente"
+   },
+   {
+    "ref": "analizatorii pot fi clasificați ca organe ce recepționează excitanți mecanici",
+    "hyp": "analizatorii pot fi clasificați ca organe ce recepționează excitanți mecanici"
+   },
+   {
+    "ref": "la exterior o fibră musculară striată este acoperită de o membrană numită sarcolemă",
+    "hyp": "la exterior o fibră musculară striată este acoperită de o membrană numită sarcolemă"
+   },
+   {
+    "ref": "sunt receptori care se adaptează foarte ușor și sunt alții ce se adaptează mai dificil",
+    "hyp": "sunt receptori care se adaptează foarte ușor și sunt alții ce se adaptează mai dificil"
+   }
+  ]
+ }
+]

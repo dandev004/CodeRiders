@@ -1,0 +1,36 @@
+[
+ {
+  "model": "mlx-whisper-large-v3",
+  "tag": "seg25_noprompt",
+  "set": [
+   "vad.max_segment_s=25",
+   "asr.use_glossary_prompt=false"
+  ],
+  "medical_correction": false,
+  "WER": 72.9,
+  "CER": 45.6,
+  "medical_term_recall": 54.5,
+  "missing_terms": [
+   "tromboaspirația",
+   "mitrală",
+   "fracție",
+   "cordaj",
+   "descărcat volemic",
+   "Dobu",
+   "Eco",
+   "Dobutamină",
+   "hemoglobină",
+   "Deficitul"
+  ],
+  "seconds": 12.4,
+  "lang_seconds": {
+   "ro": 183.2,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul 48, el a fost pe data de uscări și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrala 3, compracție de 38-40. Da, el e pacient cardiovascular și trivascular. Și acolo suspecția și la ruptura de cordaș a fost. Care nu prea au fost confirmate, au stat în recomandată voks. Deci pe om trece transferat cu dozile mici de noradrenalină. În scris, vin este primiustul al post-transferatului secției. A fost descarcată cu un tip destul de activ? Elu Foscu, un parere care a fost înseamnă de noștri, la momentul de transfer, a fost asemănătos. Este obținut din NOAR. De NOAR. Așa. De chemodinamic, stabil, NOAR-ul 001. Mezi scuturmi. Dou micrometri. El și acela, acesta și acela. Așa, a transferat acolo, acolo în continuă el a fost dezcarcat volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunele 80 pe 40, dozile de 0,22 de nori și DOBO-ii O patru. S-a facut ieco, el e gol, si dreapta si stanga, stanga daca putem sa o consideram pe motiv diametrala care scapa, dreapta e goluta, noi dam volumul acum si el deja incitusor se restabileste tensiunea. Da, da, da. Da, punem arteria ca ar trebui sa monitorizam tot ce mai este activ. Cum se face? Nori, arteria, umplere vasculara, tromboprofilaxia, etc.",
+   "Deci noi am ajuns la antibioticul, am scănat o cuma, putem mai departe cu urologul și tactica dacă este de intervenit? De intervenit de stentat sau de pus nefrostomă, depinde ce... Și de clinic, cum e avut easa? De clinic, din momentul când noi am schimbat frecvența la EKS la 80 merită frecvență, noi deja suntem în ridușă 2 zile de norodreniline și de două. Două noi avem azi ceva de 80 ultimul echilibru și Norul, noi am spus, deja era la 0,08-0,07 din amică. Dinamică este pozitivă pe acest pion, anemică, 86 de hemoglobine, am comandat un pungă de sânge, am ușor să apară pungă de sânge, lactatul a spus la 1,8. Deci nu suntem tare agresivi cu asta. Dar oricum ai tornat, mă infuzează între însă, nu? Da, da, da, se infuzează. A făcut Ievo, Trans Torace nu e mie informativ, a făcut Trans Svăgean. Deci Trans Svăgean cam tot nu prea ne explică. Este o insuficiență de gradul 2."
+  ]
+ }
+]

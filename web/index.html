@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Secure MOM · Medpark</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="#">
+    <span class="logo"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2 4 5v6c0 5 3.4 9.4 8 11 4.6-1.6 8-6 8-11V5l-8-3Zm-1 5h2v4h4v2h-4v4h-2v-4H7v-2h4V7Z"/></svg></span>
+    <span><b>Secure MOM</b><small>Medpark · proces-verbal automat</small></span>
+  </a>
+  <nav>
+    <a href="#" data-nav="new">Ședință nouă</a>
+    <a href="#istoric" data-nav="history">Istoric</a>
+  </nav>
+</header>
+
+<main>
+  <!-- Ședință nouă -->
+  <section id="view-new" class="view" hidden>
+    <div class="hero">
+      <h1>Procesul-verbal al ședinței,<br><em>gata în câteva minute</em></h1>
+      <p>Încărcați sau înregistrați ședința. Deciziile, responsabilii și termenele sunt extrase automat.</p>
+    </div>
+    <div class="panel">
+      <div class="inputs">
+        <div id="drop" class="tile drop" tabindex="0" role="button" aria-label="Încărcați înregistrarea">
+          <span class="ic" id="drop-ic"></span>
+          <b>Încărcați înregistrarea</b>
+          <span class="sub">Trageți fișierul aici sau faceți click · audio sau video</span>
+        </div>
+        <div id="rec" class="tile rec" tabindex="0" role="button" aria-label="Înregistrați ședința">
+          <span class="ic" id="rec-ic"></span>
+          <b id="rec-label">Înregistrați ședința</b>
+          <span id="rec-sub" class="sub">Direct de la microfonul calculatorului</span>
+          <canvas id="meter" width="400" height="64" hidden></canvas>
+        </div>
+      </div>
+      <input id="file" type="file" accept="audio/*,video/*" hidden>
+      <div id="file-chip" class="file-chip" hidden></div>
+
+      <div class="opts">
+        <div class="full">
+          <span class="lbl">Tipul ședinței</span>
+          <div id="types" class="seg types"></div>
+        </div>
+        <div>
+          <span class="lbl">Limba documentului</span>
+          <div id="langs" class="seg"></div>
+        </div>
+        <div>
+          <label class="lbl" for="date">Data ședinței</label>
+          <input id="date" type="date">
+        </div>
+      </div>
+      <button id="start" class="btn primary big" disabled></button>
+    </div>
+  </section>
+
+  <!-- Procesare -->
+  <section id="view-progress" class="view" hidden>
+    <div class="panel progress">
+      <span class="corner" title="Timp scurs"><span id="clock-ic"></span><span id="p-elapsed">00:00</span></span>
+      <div id="p-kicker" class="kicker"></div>
+      <div id="p-file" class="p-file"></div>
+      <div class="p-num"><span id="p-pct">0</span><small>%</small></div>
+      <div class="track" role="progressbar" aria-valuemin="0" aria-valuemax="100"><i id="p-bar"></i></div>
+      <p id="p-title" class="p-title">Se pregătește procesul-verbal…</p>
+      <p id="p-sub" class="p-sub"></p>
+      <div id="p-error" class="alert" hidden></div>
+      <a id="p-back" class="btn" href="#" hidden>Înapoi</a>
+    </div>
+  </section>
+
+  <!-- Rezultat -->
+  <section id="view-result" class="view" hidden>
+    <div class="result-head">
+      <div class="rh-text">
+        <div id="r-meta" class="kicker"></div>
+        <h1><span id="ok-ic" class="ok-ic"></span>Procesul-verbal este gata</h1>
+      </div>
+      <div class="actions">
+        <div id="r-langs" class="seg sm" title="Limba documentului"></div>
+        <a id="dl-docx" class="btn"><span id="dl-ic"></span>Descarcă Word</a>
+        <button id="r-send" class="btn primary" type="button"><span id="mail-ic"></span>Trimite pe email</button>
+      </div>
+    </div>
+    <div id="r-sent" class="sent" hidden></div>
+    <div class="paper">
+      <div id="doc-loading" class="doc-loading"><i class="spin"></i><span>Se deschide documentul…</span></div>
+      <iframe id="mom-frame" title="Proces-verbal"></iframe>
+    </div>
+    <div class="center"><a id="r-new" class="btn ghost" href="#">+ Ședință nouă</a></div>
+  </section>
+
+  <!-- Istoric -->
+  <section id="view-history" class="view" hidden>
+    <div class="hero left">
+      <h1>Istoric</h1>
+      <p>Procesele-verbale generate pe acest server.</p>
+    </div>
+    <div id="history" class="list"></div>
+  </section>
+</main>
+
+<dialog id="mail">
+  <form id="mail-form">
+    <h3>Trimite pe email</h3>
+    <p class="muted">Introduceți adresa destinatarului (mai multe — separate prin virgulă). Emailul pleacă prin serverul intern al spitalului.</p>
+    <input id="mail-to" type="email" multiple placeholder="nume@medpark.local" autocomplete="email" required>
+    <div id="mail-err" class="alert" hidden></div>
+    <div class="dlg-actions">
+      <button type="button" id="mail-cancel" class="btn ghost">Anulează</button>
+      <button type="submit" id="mail-send" class="btn primary">Trimite</button>
+    </div>
+  </form>
+</dialog>
+
+<footer><span id="lock-ic"></span>Procesare 100% locală — datele nu părăsesc rețeaua spitalului</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+# Glosar medical RO / RU / EN pentru mediul clinic din Republica Moldova.
+# - terms: forma canonică (folosită în promptul Whisper și în corectarea fuzzy)
+# - variants: erori ASR reale observate (inclusiv pronunție moldovenească) -> forma corectă
+# Extensibil fără cod: adăugați termeni noi aici, pipeline-ul îi preia automat.
+
+prompt_seed:
+  # neutru: fără pacienți, paturi sau cifre concrete (altfel Whisper e „împins” să le audă și pe alte înregistrări);
+  # termenii specifici tipului de ședință se adaugă automat din categoriile de mai jos
+  ro: "Ședință la spitalul Medpark, Chișinău."
+  ru: "Совещание в больнице Medpark, Кишинёв."
+  en: "Meeting at Medpark hospital, Chisinau."
+
+categories:
+  cardiology:
+    ro: [infarct miocardic, cardiopatie ischemică, fracție de ejecție, insuficiență mitrală, mitrală, tricuspidă, fibrilație atrială, coronarografie, stent, angioplastie, tromboaspirație, cordaje, ruptură de cordaje, ecocardiografie, electrocardiogramă, troponină, hipertensiune, hipotensiune, instabilitate hemodinamică, șoc cardiogen, electrofiziologie, pacemaker, trivascular, bypass aortocoronarian]
+    ru: [инфаркт миокарда, фракция выброса, митральная недостаточность, фибрилляция предсердий, коронарография, стентирование, тромбоаспирация, эхокардиография, тропонин]
+    en: [ejection fraction, STEMI, NSTEMI, PCI, CABG, stent, troponin]
+  intensive_care:
+    ro: [ATI, terapie intensivă, noradrenalină, adrenalină, dobutamină, vasopresor, suport vasopresor, inotrop, ventilație mecanică, intubație, extubație, traheostomie, saturație, oxigenoterapie, hipercapnie, hipercapnic, echilibru acido-bazic, lactat, deficit de baze, insuficiență respiratorie, sepsis, șoc septic, urosepsis, reîncărcare volemică, descărcare volemică, umplere vasculară, cateter arterial, linie arterială, cateter venos central, diureză, hemodializă, hemodiafiltrare, sedare, scor Glasgow, delir, encefalopatie]
+    ru: [реанимация, норадреналин, искусственная вентиляция легких, интубация, сатурация, гиперкапния, лактат, дефицит оснований, сепсис, уросепсис, диурез, седация]
+    en: [ICU, SOFA score, ventilator, weaning, sedation, fluid balance, arterial line]
+  infectious:
+    ro: [antibioterapie, antibiotic, antibiogramă, hemocultură, urocultură, Klebsiella, Candida, Pseudomonas, Acinetobacter, Escherichia coli, Staphylococcus aureus, meropenem, amikacină, vancomicină, colistină, ceftriaxonă, cefoperazonă, piperacilină tazobactam, fluconazol, caspofungină, sensibil, rezistent, procalcitonină, proteina C reactivă, leucocitoză, febră]
+    ru: [антибиотикотерапия, антибиотикограмма, гемокультура, клебсиелла, кандида, меропенем, амикацин, флуконазол, прокальцитонин]
+    en: [procalcitonin, CRP, culture, sensitivity, MDR, carbapenem]
+  surgery_urology:
+    ro: [laparotomie, laparoscopie, adrenalectomie, nefrostomă, nefrostomie, ureterohidronefroză, stent ureteral, drenaj, dren, pleurezie, lichid pleural, puncție pleurală, toracocenteză, anastomoză, histologie, biopsie, oncolog, urolog, traumatolog, anestezie epidurală, epidurală, anestezie generală]
+    ru: [лапаротомия, адреналэктомия, нефростома, дренаж, плевральная жидкость, гистология, биопсия, эпидуральная анестезия]
+    en: [histology, biopsy, JJ stent, nephrostomy, drain]
+  pharmacology:
+    ro: [Forxiga, dapagliflozină, Diacarb, acetazolamidă, furosemid, spironolactonă, heparină, enoxaparină, Clexane, anticoagulant, antiagregant, aspirină, clopidogrel, ticagrelor, amiodaronă, statină, atorvastatină, insulină, omeprazol, pantoprazol, paracetamol, morfină, fentanil, propofol, midazolam, albumină, transfuzie, masă eritrocitară, plasmă proaspăt congelată]
+    ru: [форксига, диакарб, фуросемид, гепарин, клексан, амиодарон, альбумин, трансфузия]
+    en: [dapagliflozin, acetazolamide, furosemide, heparin, enoxaparin]
+  laboratory_imaging:
+    ro: [hemoglobină, anemie, creatinină, uree, bilirubină, transaminaze, trombocite, coagulogramă, INR, ionogramă, potasiu, sodiu, tomografie computerizată, CT, RMN, ecografie, radiografie, noduli, consolidare, condensare]
+    ru: [гемоглобин, анемия, креатинин, мочевина, компьютерная томография, узелки]
+    en: [CT scan, MRI, ultrasound, hemoglobin, creatinine]
+  administrative:
+    ro: [ordin, dispoziție, buget, achiziții publice, licitație, contract, stat de personal, gărzi, program de lucru, raport, audit, acreditare, protocol clinic, indicatori de performanță, CNAM, Ministerul Sănătății, asigurare obligatorie de asistență medicală]
+    ru: [приказ, бюджет, закупки, тендер, договор, штатное расписание, дежурства, отчёт, аккредитация]
+    en: [KPI, budget, procurement, deadline, report, audit, accreditation, follow-up]
+
+# erori ASR frecvente -> forma corectă (potrivire exactă pe cuvânt/sintagmă, insensibil la majuscule)
+variants:
+  tromboproflexia: tromboprofilaxia
+  tromboproflexie: tromboprofilaxie
+  trumboaspiracea: tromboaspirația
+  tromboaspiracea: tromboaspirația
+  metrală: mitrală
+  metrala: mitrala
+  metrală care scapă: mitrală care scapă
+  forxiga: Forxiga
+  forxigă: Forxiga
+  făruxiga: Forxiga
+  deacarpul: Diacarbul
+  deacarp: Diacarb
+  diacarpul: Diacarbul
+  șumplere vasculare: umplere vasculară
+  şumplere vasculare: umplere vasculară
+  noradrenalina: noradrenalina
+  amikacino: amikacina
+  amicacină: amikacină
+  clepsiela: Klebsiella
+  klebsiela: Klebsiella
+  clebsiela: Klebsiella
+  fluconazolul: fluconazolul
+  lucanozol: fluconazol
+  nefrostoma: nefrostoma
+  adrenaloctomia: adrenalectomia
+  adrenaloctomie: adrenalectomie
+  urozepsis: urosepsis
+  urozeps: urosepsis
+  hipercapnic: hipercapnic
+  echilibru acidobazic: echilibru acido-bazic
+  insuficiență respiratorică: insuficiență respiratorie
+  stent ureterale: stent ureteral
+  epidurala: epidurala
+  histologia: histologia
+  метрала: митральная
+  клепсиелы: клебсиеллы
+  # observate pe înregistrarea Medpark (accent moldovenesc)
+  miropinev: meropenem
+  miropinem: meropenem
+  miropenem: meropenem
+  meropinem: meropenem
+  diacarpu: Diacarbul
+  diacarp: Diacarb
+  clipsiele: Klebsiella
+  clipsiela: Klebsiella
+  clebsiele: Klebsiella
+  hidroniferoza: hidronefroza
+  hidroniferoză: hidronefroză
+  uricoroniferoza: ureterohidronefroza
+  ureteroniferoza: ureterohidronefroza
+  antimikotic: antimicotic
+  volimic: volemic
+  volemnic: volemic
+  trombospirație: tromboaspirație
+  miocardie: miocardic
+  scentare: stentare
+  emicacină: amikacină
+  emikacină: amikacină
+  emicacina: amikacina
+  clipsie: Klebsiella
+  clipsii: Klebsiella
+  dantimicotic: antimicotic

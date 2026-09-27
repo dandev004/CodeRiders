@@ -1,0 +1,24 @@
+.venv/
+__pycache__/
+models/
+data/jobs/
+data/logs/
+data/moldovan_corpus/*.parquet
+data/start.log
+n8n/data/
+tools/n8n/node_modules/
+tools/n8n/package-lock.json
+training/checkpoints/
+
+# mari / regenerabile — nu încap pe GitHub (limita 100 MB/fișier, 2 GB/push)
+.venv-tts/
+data/moldovan_test/
+data/tts_medical/
+data/tts_xtts/
+data/tts_test/
+data/xtts_refs/
+data/xtts_refs_test/
+data/medical_text/medical_qa_ru.csv
+# date Medpark (înregistrarea și transcrierea de referință) — rămân doar local
+data/samples/
+data/reference/

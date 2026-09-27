@@ -1,0 +1,33 @@
+[
+ {
+  "model": "mlx-whisper-large-v3",
+  "tag": "v3_seg12",
+  "set": [
+   "vad.max_segment_s=12"
+  ],
+  "medical_correction": false,
+  "WER": 64.4,
+  "CER": 42.3,
+  "medical_term_recall": 63.6,
+  "missing_terms": [
+   "tromboaspirația",
+   "trivascular",
+   "cordaj",
+   "descărcat volemic",
+   "Eco",
+   "urologul",
+   "Dobutamină",
+   "pungă de sânge"
+  ],
+  "seconds": 21.5,
+  "lang_seconds": {
+   "ro": 119.7,
+   "ru": 23.7,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul de patul 8, el a fost pădat de uzgrăci râsulănoi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3, fracție de 3,6-3,4 kg Cardiac și acolo suspecție și la ruptura de cordașă. care nu prea poate conturna ATI, alustatul necandidată, voks, treci pe om, treci transferat cu dozile mici de noradrenalină. A fost descărcată cu un tip de studii activ? Elu Foscu, un parere care a fost înseamnă dinorși, la momentul de transfer de asemenea. Денор. Аша. Мы с Кутурми. două micrometre. El și eu am făcut acestea. Așa, a transferat acolo, acolo în continuă el a fost dezcarcat volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunele 80 pe patul nouă S-a făcut ieco, el e gol, și dreapta și stânga, stânga dacă putem să considerăm pe motiv diametrală care scapă Laptă e găduță, noi dăm volumă acum și el deja încet ușor se restabilește tensiunea Da, scade și norul?",
+   "Deci noi și am ajuns să stat, să primească antibioticul, am scănat-o acum, de mediparticul rogul și...tactică, dacă ești, din ternit. De intervine de stentat sau de pus nefrostomă, depinde ce Și de clinici, cum e bine asta? Clinica, de moment, când noi am schimbat frecvența la EKS la obzeci merită frecvența, noi de jos suntem în rădăciă doi zi de noradrenalină și de dobu. У нас есть обзор по этому экземпляру. Нормально, я вам скажу, тяжелый, он левал об 007, я бы переколол, не знаю. dinamică, anemică, hemoglobină, am comandat-o cu un gădisânge, am ușor să apară La lactatul scăzut la unul și opt, deficitul minus opt să menține. Deci nu suntem tare agresivi cu asta fost"
+  ]
+ }
+]

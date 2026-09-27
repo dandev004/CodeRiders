@@ -1,0 +1,64 @@
+[
+ {
+  "model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan-med",
+  "WER": {
+   "ro": 6.1,
+   "ru": 21.9,
+   "en": 6.7,
+   "mixed": 45.0
+  },
+  "language_detected_correctly": "7/8",
+  "rows": [
+   {
+    "ref": "Pacientul de pe patul patru primește meropenem și amikacină de mâine dimineață.",
+    "hyp": "Pacientul de pe patul 4 primește meropenem și amikacină de mâine dimineață",
+    "lang": "ro"
+   },
+   {
+    "ref": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу.",
+    "hyp": "Хорошо, я сделаю компьютерную томографию до пятницы и позвоню урологу",
+    "lang": "ru"
+   },
+   {
+    "ref": "Okay, let's schedule the follow-up for next week and check the troponin levels.",
+    "hyp": "Ok, let's schedule the follow-up for next week and check the troponin levels.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Сатурация девяносто два процента, давление восемьдесят на сорок.",
+    "hyp": "Сатурация 92%, давление 80 на 40.",
+    "lang": "ru"
+   },
+   {
+    "ref": "Doamna doctor Rusu discută cu familia până joi despre nefrostomă.",
+    "hyp": "Doamna dr. rusu discută cu familia până joi despre nefrostomă",
+    "lang": "ro"
+   },
+   {
+    "ref": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "hyp": "Нужно снизить дозу норадреналина и продолжить антибиотикотерапию.",
+    "lang": "ru"
+   },
+   {
+    "ref": "Deci am hotărât că pacientul идёт на операцию завтра утром.",
+    "hyp": "Deci am hotărât că pacientul idiot noi pirat său zahără utră-utră",
+    "lang": "ro"
+   },
+   {
+    "ref": "Hemoglobina a scăzut la optzeci și șase, am comandat o pungă de sânge.",
+    "hyp": "Femoglobina a scăzut la 86, am comandat o pungă de sânge.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Facem ecocardiografie și the ejection fraction is around forty percent.",
+    "hyp": "Facem ecocardiografie și The ejection fraction is around 40%.",
+    "lang": "ro"
+   },
+   {
+    "ref": "Посев крови положительный, клебсиелла чувствительна к меропенему.",
+    "hyp": "Посев крови положительный, клебсиелла чувствительно к меропениму.",
+    "lang": "ru"
+   }
+  ]
+ }
+]

@@ -1,0 +1,42 @@
+parametri antrenați: 104.9M (doar blocurile decoderului)
+2500 fraze medicale sintetice + 1000 fraze reale moldovenești
+ep 1 pas 1/874 loss 1.227 3.29s/pas mem activ 3.1G cache 0.0G vârf 5.1G
+ep 1 pas 2/874 loss 0.962 3.23s/pas mem activ 3.1G cache 0.0G vârf 5.9G
+ep 1 pas 3/874 loss 1.049 3.04s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 4/874 loss 1.217 2.91s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 5/874 loss 1.282 2.90s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 25/874 loss 0.797 2.97s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 50/874 loss 0.620 3.05s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 75/874 loss 0.568 2.94s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 100/874 loss 0.472 2.92s/pas mem activ 3.1G cache 0.0G vârf 6.5G
+ep 1 pas 125/874 loss 0.483 2.96s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 150/874 loss 0.391 2.95s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 175/874 loss 0.394 2.96s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 200/874 loss 0.435 4.00s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 225/874 loss 0.438 4.21s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 250/874 loss 0.425 2.97s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 275/874 loss 0.459 2.92s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 300/874 loss 0.371 2.93s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 325/874 loss 0.391 2.93s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 350/874 loss 0.343 2.96s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 375/874 loss 0.326 3.04s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 400/874 loss 0.361 3.04s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 1 pas 425/874 loss 0.318 3.03s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 450/874 loss 0.166 3.03s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 475/874 loss 0.185 3.05s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 500/874 loss 0.171 3.09s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 525/874 loss 0.177 2.97s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 550/874 loss 0.138 2.98s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 575/874 loss 0.159 3.04s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 600/874 loss 0.178 3.03s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 625/874 loss 0.134 3.01s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 650/874 loss 0.168 2.97s/pas mem activ 3.1G cache 0.1G vârf 7.0G
+ep 2 pas 675/874 loss 0.210 2.95s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 700/874 loss 0.163 2.92s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 725/874 loss 0.144 3.09s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 750/874 loss 0.192 3.06s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 775/874 loss 0.170 2.92s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 800/874 loss 0.166 2.96s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 825/874 loss 0.154 2.92s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+ep 2 pas 850/874 loss 0.160 2.92s/pas mem activ 3.1G cache 0.0G vârf 7.0G
+salvat -> /Users/crivoidan/Desktop/secure_mom/models/mlx-whisper-turbo-moldovan-med

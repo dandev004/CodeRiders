@@ -1,0 +1,30 @@
+[
+ {
+  "model": "mlx-whisper-large-v3-turbo + RO:mlx-whisper-turbo-moldovan",
+  "tag": "dual",
+  "set": [],
+  "medical_correction": false,
+  "WER": 52.1,
+  "CER": 31.1,
+  "medical_term_recall": 68.2,
+  "missing_terms": [
+   "tromboaspirația",
+   "cordaj",
+   "stentat",
+   "nefrostomă",
+   "Dobutamină",
+   "anemică",
+   "pungă de sânge"
+  ],
+  "seconds": 10.0,
+  "lang_seconds": {
+   "ro": 152.5,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul 48, el a fost pe data de 11 și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrala 3 cu fracție de 3,83 40, da, eul e pacientul, deci, cardiac, și trivascular, nu? trivascular, da, și acolo suspecția și la ruptura de cordaș a fost. Care nu-l-i prea confirmat, e o statul 1 până la data 19, pe 19 transferat cu dozele mici de noradrenalină, și vine se primește-o transferat pe secție. At fost despertat atot continuu, destul de activ. El a fost, îmi pare că atunci este vrat din ori, la momentul de transfert a să vreți. La momentul de transferie, dacă este numărul de 6 și 9, el o numai 18 de nor, așa, hemodinamic, instabil, norul 001, 2 micropo, el și-a abunat acest și-a abunat acest. Așa, transferat acolo, acolo în continuă, el a fost descărcat volemic, și acuma ajuns pe motivul de instabilitate hemodinamică, pentru a se întâmplător, dozele de 22 de nord și dobu-i... 4. S-a făcut eco, el e gol și dreapta și stânga, stânga dacă putem să considerăm pe motiv de mitrală care scapă, dreapta e golul ță, noi îi dea volumul acuma, și el deja încet ușor se restabilește tensiunea. Ultima discusiune a fost următorului.",
+   "Deci noi și-am ajustat spunește antibioticul, am scănat-o acum, vedem mai departe cu urologul și tactica, dacă ești de intervenit, de intervenit, de spintat sau de pus nevostomă, depinde ce... Clinic din momentul când am schimbat frecvența la x, la 80, mărită frecvența, noi deja suntem în redușie a 20 și de nord, în ilină și de domnul, noi avem o secundă 80 ultimul echilibru și... Norul, noi am scăzut deja undeva la 1008, 007, trebuiește călător, 08 tiranța, nu-și 06, dinamica 1 pic este pozitivă pe fondul acesta, anemica, 86 hemoglobină, am comandat-o plumbă de sânge, am nu 7 să apară supra plumbă așeea, lactatul a scăzut la 1 și 8, așa mai departe. Deficitul minus 8 să menține, deci nu sunt deaptare agresiv cu asta a fost..."
+  ]
+ }
+]

@@ -1,0 +1,31 @@
+[
+ {
+  "model": "mlx-whisper-large-v3",
+  "tag": "v3_seg25",
+  "set": [],
+  "medical_correction": false,
+  "WER": 56.4,
+  "CER": 36.4,
+  "medical_term_recall": 63.6,
+  "missing_terms": [
+   "tromboaspirația",
+   "fracție",
+   "cordaj",
+   "descărcat volemic",
+   "Eco",
+   "Dobutamină",
+   "hemoglobină",
+   "Deficitul"
+  ],
+  "seconds": 13.1,
+  "lang_seconds": {
+   "ro": 151.7,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul de pe patul 8, el a fost pe dată de uscări și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3, compracție de 38-40. Cardiac și trivascular. Și acolo suspecția și la ruptura de cordaș a fost. care nu prea poate conturna ATI, alustatul necandidată, voks, treci pe om, treci transferat cu dozile mici de noradrenalină. A fost descărcată cu un tip de studii activ? Elu Foscu, un parere care a fost înseamnă dinorși, la momentul de transfer de asemenea. Este obținut din nor. Din nor. Așa. De chemodinamic, stabil, norul 001, măi scuturmii, dou micrometri. El și același este și același. Așa, a transferat acolo, acolo în continuă el a fost dezcarcat volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunele 80 pe 40, dozile de 0,22 de nori și dobul e S-a făcut ieco, el e gol, și dreapta și stânga, stânga dacă putem să considerăm pe motiv diametrală care scapă, dreapta e golulță, noi dăm volumă acum și el deja încet ușor se restabilește tensiunea. Da, scade și norul?",
+   "Deci noi și am ajustat, spre mers, cea antibiotică, am scănat o cuma, de mai departe cu urologul și tactica dacă este de intervenit De intervenit de stentat sau de pus nefrostomă, depinde ce Și de clinici cum e avut easa? De clinici, de moment, când noi am schimbat frecvența la EKS la 80 merită frecvență, noi deja suntem în răduşiă doi zi de noradrenalină și de dobu. Dobu noi avem azi ceva de 80 cu ultimul echilibru și Norul, noi am spus, deja era la 0,08-0,07 din calcule. Dinamică este pozitivă pe acest pion, anemică, 86 de hemoglobine, am comandat un pungă de sânge, am ușor să apară pungă de sânge, lactatul, am spus, la 1,8 Deci nu suntem tare agresivi cu asta."
+  ]
+ }
+]

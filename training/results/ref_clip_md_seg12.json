@@ -1,0 +1,34 @@
+[
+ {
+  "model": "mlx-whisper-turbo-moldovan",
+  "tag": "md_seg12",
+  "set": [
+   "vad.max_segment_s=12"
+  ],
+  "medical_correction": false,
+  "WER": 60.1,
+  "CER": 32.8,
+  "medical_term_recall": 59.1,
+  "missing_terms": [
+   "tromboaspirația",
+   "mitrală",
+   "cordaj",
+   "Dobu",
+   "stentat",
+   "nefrostomă",
+   "Dobutamină",
+   "anemică",
+   "pungă de sânge"
+  ],
+  "seconds": 8.2,
+  "lang_seconds": {
+   "ro": 152.5,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "se porne, parcă, puțin, ok. pacientul patru opt, el a fost pe data de unsprezece, a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrala trei cu o fracție de trei și opt trei patru. cu zece, cardiac, și trivascular, nu? trivascular, da, deci, acolo suspecția și la ruptura de cordaș a fost. care nu-l-i prea confirmat, e o statul unu până la data o optsprezece, pe o optsprezece transferat cu dozele mici de noradrenalină, și vine se primește-o transferat pe secție. at fost despertat atot continuu, destul de activ. El a fost, îmi pare că atunci este vrat din ori, la momentul de transfert a să vreți. la momentul de transferie, dacă v-au obținut și șase pe nouă, el o are optsprezece de nor, așa, hemodinamic, instabil norul zero zero unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, unu, două micromi, el și-ar fi acesta și-ar fi acesta. transferat acolo, acolo în continuă el a fost descărcat volemic, și acuma ajuns pe motivul de instabilitate hemodinamică, pentru a sutelea optzeci pe patru. dozele de zero douăzeci și doi de nord și dobă o... patru. s-a făcut eco, el îi gol, și dreapta, și stânga, stânga dacă putem să considerăm pe motiv de metal, pe care scapă. raptă-i bunulța, noi îndemn volumul acuma, și el deja încet ușor se restabilește tensiunea. ultima discusiune a fost următorului.",
+   "deci noi și-am ajustat spunește antibioticul, am scânat-o acum, vedem mai departe cu urologul și tactica, dacă ești de intervenit. determinir de spintat sau de pus nefrostoma, depinde ce... și de clinică e acum evoluiază? clinic, din momentul când am schimbat frecvența la x, la optzeci, mărită frecvența, noi deja suntem în reduși o douăzeci și de noradrenalină și de domnul, domnul noi avem în... și va dur optzeci ultimul echilibru și... norul noi am scăzut deja undeva la un zero zero opt zero zero șapte, trebuie recălculat, era bunul. zero optiranța, încercă o șase, dinamica unu pic este pozitivă pe fondul acesta, anemica, optzeci și șase hemoglobină, încomandat o plumbă de sânge, am nu șase o să apară su plumbul plumbul. și așaia, lactatul a scăzut la unu și opt, deficitul minus opt să menține. deci nu sunt demtarii agresivi cu asta a fost..."
+  ]
+ }
+]

@@ -1,0 +1,176 @@
+{
+ "ro_model": "models/mlx-whisper-turbo-moldovan-med2",
+ "n": 50,
+ "curat": {
+  "WER_latin": 21.1,
+  "WER_chirilic": 40.0,
+  "numere_exacte": "22/25",
+  "numere_pct": 88.0,
+  "termeni_critici": "44/60",
+  "termeni_pct": 73.3,
+  "seconds": 39.0,
+  "examples": [
+   {
+    "ref": "Așa, la patul 10 am pus transfuzie de sânge ieri, nu-i așa?",
+    "hyp": "Așa, la patul 10 am pus transfuzie de sânge ieri, nu-i așa?",
+    "langs": "ro"
+   },
+   {
+    "ref": "Nu cred că ejection fraction este corectă la acest pacient, He has metastasis to the bone. Trebuie să schimbăm planul de chimioterapie amu.",
+    "hyp": "Nu cred că ejection fraction este corectă la acest pacient. he has metastasis to the bone trebuie să schimbăm planul de chimioterapie amu.",
+    "langs": "ro+en+ro"
+   },
+   {
+    "ref": "Păi, la 18 ce se întâmplă cu albumina? Врач сказал что Nu-i clar dacă anticoagulantul este suficient.",
+    "hyp": "Păi, la 18 se întâmplă cu albumina, врач сказал что? nu-i clar dacă anticoagulantul este suficient.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Ok, deci claudiu primește statină și pantoprazol, Вопрос в другом, Dar midazolamul se administrează doar dacă e agitat.",
+    "hyp": "Ok, deci cloidiu primește statină și pantoprazol. вопрос другом dar midazolamul se administrează doar dacă e agitat.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Pai, eu zic să nu risipim timp cu stent ureteral dacă rinichi'l e mort deja. Давление упало слишком быстро после инсульта. Deci, în loc de așteptare, facem nefrostomie pentru a salva restul funcției?",
+    "hyp": "Pai, eu zic să nu risipim timp cu stent ureteral dacă rinichem e măr deja. давление упало слишком быстро после инсультации deci în loc de așteptare facem nefrostomie pentru a salva prestul funcției.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "У нас в отделении уже нет мест для таких тяжелых случаев. We need to decide on the JJ stent placement now. Păi, dacă insistăm cu operația, anestezistul poate face față sau nu?",
+    "hyp": "У нас в отделении уже нет места для таких тяжелых случая. we need to decide on the jj stent placement now. păi, dacă insistăm cu operație, anestezistul poate face față sau nu?",
+    "langs": "ru+en+ro"
+   },
+   {
+    "ref": "Acuș avem nevoie de un oncolog pentru a evalua stadiul tumorilor înainte de orice intervenție. По анализам всё нормально, но кровь из носа течет постоянно. Deci, dacă nu apare hematurie până mâine, cancelăm planul inițial?",
+    "hyp": "Acuș avem nevoie de un oncolog pentru a-i valua stabiul tumorilor înainte de orice intervenție. по анализам всё нормально, ну кровь износотичёт постоянно. deci dacă nu apare hematurie până mâine, cancelăm planul inițial.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "La dânsa, simptomele de retenție urinară sunt clare și trebuie să acționăm rapid. В реанимации ситуация стабилизируется медленно. Așa că propunem punctul de vedere al chirurghilor pentru anestezie?",
+    "hyp": "La dânsa, simptomele de retenție urinară sunt clare și trebuie să acționăm rapid. в реанимации ситуация стабилизируется медленно așa că propunem punctul de vedere al chirurgilor pentru anestezie.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Cred că toracocenteza e minim invaziv și o putem programa pe data de 18. Ну короче, давление упало ниже нормы критически. Deci, dacă volumul scade sub 80 de mililitri, schimbăm strategia?",
+    "hyp": "Cred că toracocenteza e minim invaziv și o putem programă pe data de 18. ну короче, давление упало ниже нормы критической. deci, dacă volumul scade sub 80 de mililitri, schimbăm strategia.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Nu-i nevoie neapărat de puncție pleurală dacă imaginea e clară. Дренаж установлен правильно, но отток всё ещё нарушен. Așa că verificăm din nou canalul anastomozei și eventual schimbăm drén-ul?",
+    "hyp": "Мини-воин аппарат и функции реурала, дакой маженя и еклара. Дренаж установлен правильна, но отток все еще нарушен. Ашак верихкам диннов канала Анастомузи, чиневентуал, скимбам дароя, скимбам дарреставец.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Dacă nefrostomia funcționează bine, putem uita de ideea despre transplant imediat. Биопсия показала наличие клеток рака третьей стадии. Deci, oncologul confirmă agresivitatea și schimbăm chimioterapia?",
+    "hyp": "Dacă nefrostomia funcționează bine, putem uita de ideea despre transplant imediat. биопсия показала анализия клеток рака третьей стадии. deci, oncologul confirmă agresivitatea și schimbăm chimioterapie.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Stent-ul trebuie schimbat periodic pentru a evita infecțiile bacteriene care apar des. Follow-up protocol includes weekly checks for all patients. Pai, la noi e diferit, dar regulamentul spitalului Medpark cere asta.",
+    "hyp": "Stent-ul trebuie să schimbat periodic pentru a urta infecțiile bacteriiene care apar des. follow-up protocol includes weekly checks for all patients. păi la noi e diferit, dar regulăm într-o hospitală următoarecea ce e asta.",
+    "langs": "ro+en+ro"
+   },
+   {
+    "ref": "Anastomoza urinară s-a realizat fără probleme majore în timpul intervenției. Анализ крови показывает повышение лейкоцитов выше двух тысяч. Deci, dacă febra crește peste 0,2 la centigrade, alertăm echipa?",
+    "hyp": "Анализ крови показывает повышение лейкоцитов выше 2000 тонн. Если так, если брак и штыб, если 0, то герначные деграды. Алертам есть.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Drainajul extracorporal va fi monitorizat zilnic până când valorile stabilizează. В реанимации уже подготовили оборудование для экстренного случая. Acuș decizăm care echipă îl gestionează și cine e responsabil de fiecare aspect?",
+    "hyp": "Drainajul extracorporal va fi monitorizat zilnic până când valorile stabilizează. в реанимации уже подготовили оборудование для экстренного случая. acuș decizăm care echipul gestionează și cine e responsabil de fiecare aspect.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "1500 de miligrame de clorură de potasiu în urină este o valoare critică. Ejection fraction is acceptable at this stage for surgery. Deci, nu am contraindicații majore pentru chirurgia pe data de 12?",
+    "hyp": "1500 de miligrame de clorură de potasiu în uree, este o valoare critică. ejection fraction is acceptable at this stage for surgery. deci nu am contraindicații majore pentru chirurgia pe data de 12.",
+    "langs": "ro+en+ro"
+   }
+  ]
+ },
+ "sala": {
+  "WER_latin": 40.5,
+  "WER_chirilic": 141.5,
+  "numere_exacte": "21/25",
+  "numere_pct": 84.0,
+  "termeni_critici": "34/60",
+  "termeni_pct": 56.7,
+  "seconds": 58.9,
+  "examples": [
+   {
+    "ref": "Așa, la patul 10 am pus transfuzie de sânge ieri, nu-i așa?",
+    "hyp": "Așa, la patul 10 am pus transfuzie de sânge ieri, nu-i așa?",
+    "langs": "ro"
+   },
+   {
+    "ref": "Nu cred că ejection fraction este corectă la acest pacient, He has metastasis to the bone. Trebuie să schimbăm planul de chimioterapie amu.",
+    "hyp": "Nu cred că ejection fraction este corectă la acest pacient. here's a test of the bone trebuie să schimbăm planul de chimioterapie amu.",
+    "langs": "ro+en+ro"
+   },
+   {
+    "ref": "Păi, la 18 ce se întâmplă cu albumina? Врач сказал что Nu-i clar dacă anticoagulantul este suficient.",
+    "hyp": "Păi, la 18 și se întâmplă cu albumina, врач сказал что? nu-i clar dacă anticoagulantul este suficient.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Ok, deci claudiu primește statină și pantoprazol, Вопрос в другом, Dar midazolamul se administrează doar dacă e agitat.",
+    "hyp": "Ok, deci clodină îl primește statină cu pantoprazolid. вопрос дюбом dar midazolam se administrează doar dacă e agitat.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Pai, eu zic să nu risipim timp cu stent ureteral dacă rinichi'l e mort deja. Давление упало слишком быстро после инсульта. Deci, în loc de așteptare, facem nefrostomie pentru a salva restul funcției?",
+    "hyp": "Pai, eu zic să nu risipim timp cu stent ureteral dacă rinichem e măr deja. давление упало слишком быстро после инсульта deci în loc de așteptare facem nefrostomie pentru a salva prestul funcției.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "У нас в отделении уже нет мест для таких тяжелых случаев. We need to decide on the JJ stent placement now. Păi, dacă insistăm cu operația, anestezistul poate face față sau nu?",
+    "hyp": "У нас в отделении уже нет мест для таких тяжелых случаев. Пэй, дакъя инсистент по операція, анестезистъл поате face фація sau не?",
+    "langs": "ru+en+ro"
+   },
+   {
+    "ref": "Acuș avem nevoie de un oncolog pentru a evalua stadiul tumorilor înainte de orice intervenție. По анализам всё нормально, но кровь из носа течет постоянно. Deci, dacă nu apare hematurie până mâine, cancelăm planul inițial?",
+    "hyp": "Acuș avem nevoie de un oncolog pentru a evoluia să tapem tumorilor înainte de orice intervenție. по анализам всё нормально, ну кровь зносотичь от постоянно. deci dacă nu apare genături până în bine, cancerăm din splanie.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "La dânsa, simptomele de retenție urinară sunt clare și trebuie să acționăm rapid. В реанимации ситуация стабилизируется медленно. Așa că propunem punctul de vedere al chirurghilor pentru anestezie?",
+    "hyp": "И оттуда симптомы, диетчатия, уриналин, сух, роман, шип, инвестор, реанимация, ситуация, стабилизируйте медленно, аж оттуда смесь в урбеке от урбеки от урбеки, интуб аннистития.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Cred că toracocenteza e minim invaziv și o putem programa pe data de 18. Ну короче, давление упало ниже нормы критически. Deci, dacă volumul scade sub 80 de mililitri, schimbăm strategia?",
+    "hyp": "Cred că toracocenteza e minim invaziv și o putem programă pe data de 18. ну короче, давление упало ниже нормы критической. deci dacă volumul scade sub 80 de mililitri, schimbăm strategia.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Nu-i nevoie neapărat de puncție pleurală dacă imaginea e clară. Дренаж установлен правильно, но отток всё ещё нарушен. Așa că verificăm din nou canalul anastomozei și eventual schimbăm drén-ul?",
+    "hyp": "Мини в войне, а в рамках, пункти преурала, даха, иммажиня и эквара. Длиннаш установлен правильно, но отток все еще нарушен. А шаг верить кандинного канала наступить, чей вентуал, скиньба, дароа, скиньба, дарреста.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Dacă nefrostomia funcționează bine, putem uita de ideea despre transplant imediat. Биопсия показала наличие клеток рака третьей стадии. Deci, oncologul confirmă agresivitatea și schimbăm chimioterapia?",
+    "hyp": "Dacă nefrostomia funcționează bine, putem omiterea despre transplant imediat. диопсия показала на рече крето крака трези стадии. deci încolo își confirmă agresivitatea și sânge încălză.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Stent-ul trebuie schimbat periodic pentru a evita infecțiile bacteriene care apar des. Follow-up protocol includes weekly checks for all patients. Pai, la noi e diferit, dar regulamentul spitalului Medpark cere asta.",
+    "hyp": "Stent-ul trebuie scumpat pentru a recidivă infecției de baterie care apar despre 5. follow-up protocol includes weekly checks for all patients. bine, d-na mâine. e diferit, dar regulăm d-o spitalul mediat la ce e asta.",
+    "langs": "ro+en+ro"
+   },
+   {
+    "ref": "Anastomoza urinară s-a realizat fără probleme majore în timpul intervenției. Анализ крови показывает повышение лейкоцитов выше двух тысяч. Deci, dacă febra crește peste 0,2 la centigrade, alertăm echipa?",
+    "hyp": "А на самом деле, это проблема в мажорном тимпу интервью с Чинчином. Анализ крови показывает повышение лейкоцитов выше 2000 тонн облака. Есть такая проблема в европейской степени, если вы не знаете, что это не так.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "Drainajul extracorporal va fi monitorizat zilnic până când valorile stabilizează. В реанимации уже подготовили оборудование для экстренного случая. Acuș decizăm care echipă îl gestionează și cine e responsabil de fiecare aspect?",
+    "hyp": "Драйнаж, ул. экстракорпорал, ва финг, мунипоризація зелних, пына твын, валори ле стабилизеаа. Реанимація уже подготовили оборудование для экстренова сущея. Ах уж дичизам, карээ, типо, gestioneаза, ши чин е responsabil дефекар аспект, хорст.",
+    "langs": "ro+ru+ro"
+   },
+   {
+    "ref": "1500 de miligrame de clorură de potasiu în urină este o valoare critică. Ejection fraction is acceptable at this stage for surgery. Deci, nu am contraindicații majore pentru chirurgia pe data de 12?",
+    "hyp": "1500 de miligrame de clorură de potasiu în uree, este o valoare critică. ejection fraction is acceptable at this stage for surgery. deci nu am contraindicații majore pentru chirurgia pe data de 12.",
+    "langs": "ro+en+ro"
+   }
+  ]
+ }
+}

@@ -1,0 +1,30 @@
+[
+ {
+  "model": "mlx-whisper-turbo-moldovan",
+  "tag": "hybrid",
+  "set": [],
+  "medical_correction": false,
+  "WER": 74.6,
+  "CER": 55.0,
+  "medical_term_recall": 68.2,
+  "missing_terms": [
+   "tromboaspirația",
+   "cordaj",
+   "stentat",
+   "nefrostomă",
+   "Dobutamină",
+   "anemică",
+   "pungă de sânge"
+  ],
+  "seconds": 7.3,
+  "lang_seconds": {
+   "ro": 183.2,
+   "ru": 0.0,
+   "en": 0.0
+  },
+  "hyp": [
+   "pacientul patru opt, el a fost pe data de unsprezece și a ajuns la noi cu infarct miocardic, a fost tromboaspirație făcută, mitrala trei cu fracție de trei virgulă opt trei patruzeci, da, eul e pacientul, deci, cardiac, și trivascular, nu? trivascular, da, și acolo suspecția și la ruptura de cordaș a fost. care nu-l-i prea confirmat, e o statul unu până la data o optsprezece, pe o optsprezece transferat cu dozele mici de noradrenalină, și vine se primește-o transferat pe secție. at fost despertat atot continuu, destul de activ. El a fost, îmi pare că atunci este vrat din ori, la momentul de transfert a să vreți. la momentul de transferie, dacă este numărul de șase și nouă, el o numai optsprezece de nor, așa, hemodinamic, instabil, norul zero zero unu, doi micropo, el și-a abunat acest și-a abunat acest. așa, transferat acolo, acolo în continuă, el a fost descărcat volemic, și acuma ajuns pe motivul de instabilitate hemodinamică, pentru a se întâmplător, dozele de zero douăzeci și doi de nord și dobu-i... patru. s-a făcut eco, el e gol și dreapta și stânga, stânga dacă putem să considerăm pe motiv de mitrală care scapă, dreapta e golul ță, noi îi dea volumul acuma, și el deja încet ușor se restabilește tensiunea. ultima tensiune a fost susținută...da, da, da, da, da, văd că îi puneți arteră, da? Da, puneți arteră, că ar trebui să monitorizăm totuși mai activ, toatea că este acestora.",
+   "deci noi și-am ajustat se primește antibioticul, am scănat-o acum vedem mai departe cu urologul și tactica, dacă ești de intervenit. clinic din momentul când am schimbat frecvența la x, la optzeci, mărită frecvența, noi deja suntem în redușie a douăzeci și de nord, în ilină și de domnul, noi avem o secundă optzeci ultimul echilibru și... norul, noi am scăzut deja undeva la unu zero zero opt, zero zero șapte, trebuiește călător, zero opt tiranța, nu-și zero șase, dinamica unu pic este pozitivă pe fondul acesta, anemica, optzeci și șase hemoglobină, am comandat-o plumbă de sânge, am nu șase o să apară supra plumbă așeea, lactatul a scăzut la unu și opt, așa mai departe. deficitul minus opt să menține, deci nu-s deaptare aia chestiație cu asta, a fost, așa rămâne, mă infuzează în transambluia, așa rămâne în eco, deci transtoracic nu-i ni-informativ, a făcut transtoracic, da, deci transtoracic încă tot nu prea ne explică, este o insuficiență de gradul doi."
+  ]
+ }
+]

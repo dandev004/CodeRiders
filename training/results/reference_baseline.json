@@ -1,0 +1,57 @@
+[
+ {
+  "model": "mlx-whisper-large-v3",
+  "medical_correction": false,
+  "WER": 69.8,
+  "CER": 48.2,
+  "medical_term_recall": 68.2,
+  "missing_terms": [
+   "tromboaspirația",
+   "trivascular",
+   "cordaj",
+   "descărcat volemic",
+   "Eco",
+   "Dobutamină",
+   "pungă de sânge"
+  ],
+  "seconds": 23.8,
+  "lang_seconds": {
+   "ro": 135.7,
+   "ru": 23.7,
+   "en": 0.0
+  },
+  "hyp": [
+   "Pacientul de patul 8, el a fost pădat de uzgrăci râsulănoi cu infarct miocardic, a fost tromboaspirație făcută, mitrală 3, fracție de 3,6-3,4 kg Cardiac și acolo suspecție și la ruptura de cordașă. care nu prea poate conturna ATI, alustatul necandidată, voks, treci pe om, treci transferat cu dozile mici de noradrenalină. A fost descărcată cu un tip de studii activ? Elu Foscu, un parere care a fost înseamnă dinorși, la momentul de transfer de asemenea. Денор. Аша. Мы с Кутурми. două micrometre. El și eu am făcut acestea. Așa, a transferat acolo, acolo în continuă el a fost dezcarcat volemic și acum a ajuns pe motivul de instabilitate hemodinamică, tensiunele 80 pe patul nouă S-a făcut ieco, el e gol, și dreapta și stânga, stânga dacă putem să considerăm pe motiv diametrală care scapă Laptă e găduță, noi dăm volumă acum și el deja încet ușor se restabilește tensiunea Da, da, da. Da, da. Da, da.",
+   "Deci noi și am ajuns să startăm, să primească antibioticul, scana, tocuma, de medici, parții cu urologul și dintre venit. De intervine de stentat sau de pus nefrostomă, depinde ce Și de clinici, cum e bine asta? Clinica, de moment, când noi am schimbat frecvența la EKS la obzeci merită frecvența, noi de jos suntem în rădăciă doi zi de noradrenalină și de dobu. У нас есть обзор по этому экземпляру. Нормально, я вам скажу, тяжелый, он левал об 007, я бы переколол, не знаю. dinamică, anemică, hemoglobină, am comandat-o cu un gădisânge, am ușor să apară La lactatul scăzut la unul și opt, deficitul minus opt să menține. Deci nu suntem tare agresivi cu asta. Dar oricum, mă infuzează între însă. Da, da, da, se infuzează. A făcut Evo, deci transturacic nu..."
+  ]
+ },
+ {
+  "model": "mlx-whisper-large-v3-turbo",
+  "medical_correction": false,
+  "WER": 75.2,
+  "CER": 52.5,
+  "medical_term_recall": 54.5,
+  "missing_terms": [
+   "tromboaspirația",
+   "cordaj",
+   "Eco",
+   "urologul",
+   "stentat",
+   "Dobutamină",
+   "anemică",
+   "hemoglobină",
+   "pungă de sânge",
+   "Deficitul"
+  ],
+  "seconds": 9.6,
+  "lang_seconds": {
+   "ro": 120.0,
+   "ru": 48.5,
+   "en": 0.0
+  },
+  "hyp": [
+   "Супорник парком. Pacientul patul opt, elul post pădată de úzgră, ce eu coloșo în sloană cu infarct miocardic, post tromboaspirăția cu pute, mitrala 3, fracție de 3, sub 3 patul opt, Da, la pacientul de ce, cardiac, trivascular, da, cardiacul suspecție și la ruptura de cordașo post care nu pe apoi confinat, iarău statul meu condivăța, oopț, deci, pe oopț, transferat cu dăzi lumiști de noradrenalină, vinist, primiști oopț, transferat cu secții. A fost de scarca tui cânti eu gustul de actevi? E eu fost am parec atunci cânti eu vrat de dinos, tu? La momentul de transfer, da sa mă? Динор, аша, мы искусственная доу микрофлотика. Я лучше очистить. Așa, a transferat acolo, acolo în continuă el a fost descărcat volemic și acum a o jocs pe motivul de instabilitate hemodinamică, tensiunele 80 pe patul cu dozele de 0,22 de nor și dobuie cu patul. S-a făcut IECO, el e gol, și dreapta și stânga, stânga dacă puteam să considerăm primul tip de mitrală care scapă dreptăi golulță, noi îi dăm volumă acum și el deja încât să restabilești disiunea. Da, scadis și noru? Da, da, da. Bădcăi puniți artyere, da? Da, punem artyere că vă trebuie să monitorizăm totul și mai activ. Cădunță ce facem? Nor, artyere? Noră, artyere.",
+   "Вещей, может быть, антибиотикой, антибиотикой, гиперкопатикой, урологией, тактикой, где есть, где интервенит de interveniu despintat sau de pus nefrostomă, depinde ce și da clinică cum evoluează? Clinic de momentul când noi am schimbat frecvența la EKS la 80 mărită frecvență, noi deja suntem în redușie a două zălușit din oradrenalină și de dobu. Dobu noi avem și но я вам скажу, тяжа, он левала 0-0, 0-0 шапте, я бы перекалкула, не знаю 0% и 0% динамика. Динамика в пик есть и позитива, и анемика, и шанс хемоглобина, он командат у кунга десынджи, он ушел с апарас, și lactatului, o sănătă, o sănătă, o sănătă, Nu sunt de altare agresiv cu asta. Dar cum ai înfuziat într-un sănătate? Da, da, da. Așa rămâne. A făcut IEGO, deci, transtorații nu"
+  ]
+ }
+]

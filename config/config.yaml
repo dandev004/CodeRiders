@@ -1,0 +1,146 @@
+# Secure MOM — configurație centrală. Nimic din pipeline nu e hardcodat:
+# modele, praguri, liste de distribuție și limbi se schimbă aici.
+
+server:
+  host: 127.0.0.1
+  port: 8000
+  data_dir: data/jobs          # audio + transcrieri + rapoarte (rămân local)
+  max_upload_mb: 1024
+
+security:
+  offline_guard: true           # blochează orice conexiune de rețea în afara rețelei interne
+  allowed_hosts: [localhost, 127.0.0.1, "::1"]
+  allowed_networks: [127.0.0.0/8, 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16, "::1/128"]
+  delete_audio_after_days: 30
+
+audio:
+  sample_rate: 16000
+  denoise: true                 # reducere zgomot staționar (ventilație, aparatură, hârșâit)
+  denoise_strength: 0.8         # 0..1 — cât de agresiv scoatem zgomotul
+  highpass_hz: 80               # taie vibrații, pași, mese lovite
+  lowpass_hz: 7800
+  normalize: true               # loudness EBU R128 — voci apropiate și îndepărtate la același nivel
+
+vad:
+  threshold: 0.45
+  min_silence_ms: 400
+  max_segment_s: 25             # măsurat: 25 s de context -> WER 69.8% -> 65.8%, fără confuzii RO->RU
+  speech_pad_ms: 200
+  min_speech_ms: 250
+
+asr:
+  backend: auto                 # auto | mlx (Apple Silicon GPU) | faster-whisper (CUDA/CPU server)
+  # Arhitectură cu două modele (măsurat pe transcrierea de referință Medpark + testul de code-switching):
+  #  - ro_*: Whisper adaptat pe 70 h de română moldovenească (FraPiz, Apache 2.0), apoi adaptat de noi pe terminologia
+  #    medicală (training/finetune_decoder_mlx.py). Listă = ordine de preferință (primul model existent pe disc).
+  #  - mlx_model / faster_whisper_model: Whisper multilingv — detecția limbii, rusă, engleză
+  #    (large-v3-turbo: 7/8 limbi corecte; large-v3 forțat pe română TRADUCE rusa -> exclus)
+  profile: accurate
+  profiles:
+    accurate:
+      ro_mlx_model: [models/mlx-whisper-turbo-moldovan-mix70, models/mlx-whisper-turbo-moldovan-med, models/mlx-whisper-turbo-moldovan]
+      ro_faster_whisper_model: [models/ct2-whisper-turbo-moldovan-med, models/ct2-whisper-turbo-moldovan]
+      mlx_model: models/mlx-whisper-large-v3-turbo
+      faster_whisper_model: models/faster-whisper-large-v3-turbo
+    fast:                       # un singur model (fără specialist) — pentru hardware foarte limitat
+      ro_mlx_model: null
+      ro_faster_whisper_model: null
+      mlx_model: models/mlx-whisper-large-v3-turbo
+      faster_whisper_model: models/faster-whisper-large-v3-turbo
+  ro_mlx_model: [models/mlx-whisper-turbo-moldovan-mix70, models/mlx-whisper-turbo-moldovan-med, models/mlx-whisper-turbo-moldovan]
+  ro_faster_whisper_model: [models/ct2-whisper-turbo-moldovan-med, models/ct2-whisper-turbo-moldovan]
+  mlx_model: models/mlx-whisper-large-v3-turbo
+  faster_whisper_model: models/faster-whisper-large-v3-turbo
+  device: auto                  # pentru faster-whisper: cuda | cpu
+  compute_type: auto            # float16 pe GPU, int8 pe CPU
+  languages: [ro, ru, en]       # limbile permise în ședință
+  default_language: ro          # limba de stat — prior pentru segmentele ambigue
+  language_prior:               # bonus de scor (dialectul moldovenesc e confundat cu rusa)
+    ro: 0.15
+    ru: 0.0
+    en: 0.0
+  lexicon_weight: 2.0           # cât contează „textul e format din cuvinte reale ale limbii” vs scorul acustic
+  # decode-and-score: re-decodăm segmentul în limba alternativă doar când ipoteza implicită e slabă
+  accept_if_lexicon_above: 0.72 # ipoteza RO cu >= 72% cuvinte reale și scor acustic ok e acceptată direct
+  accept_if_logprob_above: -0.8
+  min_words_per_second: 1.0     # sub acest ritm ipoteza RO e considerată trunchiată (specialistul se oprește la EN/RU)
+  word_confidence_low: 0.5      # sub acest prag cuvântul e marcat „de verificat” în transcriere (numere, doze, termeni)
+  second_pass_min_prob: 0.08    # încercăm doar limbile cu > 8% în detecția de limbă
+  tokens_per_second: 9          # limită de tokeni per frază (taie buclele de halucinație devreme)
+  compression_ratio_max: 2.2    # peste = buclă de halucinație
+  no_speech_threshold: 0.6
+  temperatures: [0.0, 0.2, 0.4]
+  beam_size: 5                  # doar faster-whisper (server CUDA): măsurat WER 51.9 -> 49.0; MLX nu are beam search
+  use_glossary_prompt: true
+
+diarization:
+  enabled: true
+  model: models/spkrec-ecapa-voxceleb
+  window_s: 1.5
+  step_s: 0.75
+  max_speakers: 12              # numărul real e estimat automat (eigengap), acesta e doar plafonul
+  min_speaker_share: 0.02       # vorbitori cu < 2% din vorbire (tuse, zgomot) sunt absorbiți
+  min_split_s: 2.0              # o frază e împărțită între vorbitori doar în bucăți de >= 2 s
+
+lexicon:
+  files:
+    ro: [models/lexicon/ro_50k.txt, models/lexicon/ro_md_corpus.txt, models/lexicon/ro_medical_forms.txt]
+    ru: [models/lexicon/ru_50k.txt, models/lexicon/ru_medical_forms.txt]
+    en: [models/lexicon/en_50k.txt]
+
+medcorrect:                     # corectarea termenilor medicali deformați de ASR (LLM local + validare fonetică)
+  # dezactivat: măsurat pe transcrierea de referință Medpark, WER 65.8% -> 66.1%, termeni recunoscuți 64% -> 59%
+  # (LLM-ul „corectează” și forme deja corecte). Păstrat pentru experimente: training/eval_reference.py --correct
+  enabled: false
+  terms_file: models/lexicon/medical_terms.tsv   # din SiMoNERo/MoNERo + corpusuri medicale RU
+  phonetic_threshold: 92        # corectare fonetică deterministă (ACTIVĂ): WER 52.1 -> 51.6, fără corecturi greșite
+  confidence_below: 0.55
+  batch_segments: 12
+
+glossary:
+  path: config/medical_glossary.yaml
+  fuzzy_threshold: 88           # similaritate minimă (0..100) pentru corectarea unui termen
+
+llm:
+  base_url: http://127.0.0.1:11434
+  model: qwen3.5:9b
+  num_ctx: 16384
+  chunk_tokens: 5000            # transcrierea lungă e procesată în bucăți (map-reduce)
+  temperature: 0.0             # determinist: același audio -> același proces-verbal
+  seed: 42
+  max_output_tokens: 3000       # plafon: un JSON care intră în buclă nu poate bloca pipeline-ul
+  think: false
+  timeout_s: 900
+
+output:
+  default_language: ro          # limba de stat
+  review_block: false           # true = blocul „⚠️ Necesită verificare umană” în document (implicit doar ce cere challenge-ul)
+  languages:
+    ro: Română
+    ru: Русский
+    en: English
+
+meeting_types:
+  medical: {ro: Consiliu medical, ru: Медицинский консилиум, en: Medical board}
+  executive: {ro: Ședință executivă, ru: Исполнительное совещание, en: Executive meeting}
+  administrative: {ro: Ședință administrativă, ru: Административное совещание, en: Administrative meeting}
+
+delivery:
+  mode: n8n                     # n8n | smtp  (n8n cade automat pe smtp dacă nu răspunde)
+  auto_send: true               # la final, procesul-verbal pleacă automat la lista de distribuție a tipului de ședință
+  n8n_webhook: http://127.0.0.1:5678/webhook/secure-mom
+  smtp_host: 127.0.0.1          # Mailpit local — niciun server extern
+  smtp_port: 1025
+  sender: secure-mom@medpark.local
+  mailbox_ui: http://127.0.0.1:8025
+  distribution_lists:           # rutare după tipul ședinței
+    medical:
+      - consiliu.medical@medpark.local
+      - director.medical@medpark.local
+      - sef.ati@medpark.local
+    executive:
+      - director.general@medpark.local
+      - board@medpark.local
+    administrative:
+      - administratie@medpark.local
+      - resurse.umane@medpark.local

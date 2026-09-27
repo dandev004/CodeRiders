@@ -1,0 +1,70 @@
+[01:45] aștept generarea textelor
+[03:43] texte:     1607
+[03:43] test scurt de antrenare (3 pași)
+parametri antrenați: 183.7M (decoder + ultimele 4 straturi ale encoderului)
+date: {'xtts': 4, 'mac': 0, 'real': 28}, voci de fundal: 14
+val loss inițial: nan (1 clipuri, cu augmentare fixă)
+ep 1 pas 1/1 loss 0.502 12.4s/pas vârf 9.7G
+== epoca 1: val loss nan (0 min)
+cel mai bun val loss inf -> /private/tmp/claude-501/-Users-crivoidan-Desktop-secure-mom/881a6594-ca13-4e88-b744-9dbbf6486170/scratchpad/xt/smoke/smoke-model
+[03:44] test antrenare: ok
+[03:44] sinteză vocală XTTS
+143 clipuri de referință, 48 vorbitori
+1 noi (1/2007), 0.2 min audio, RTF 1.19, 0.3 min
+2 noi (2/2007), 0.4 min audio, RTF 0.98, 0.4 min
+3 noi (3/2007), 0.6 min audio, RTF 0.87, 0.5 min
+25 noi (25/2007), 4.1 min audio, RTF 0.82, 3.3 min
+[04:08] v2: sinteză vocală XTTS (continuă de la 36)
+143 clipuri de referință, 48 vorbitori
+1 noi (37/2007), 0.2 min audio, RTF 0.82, 0.1 min, RAM vârf 4.9G, MPS 4.2G
+2 noi (38/2007), 0.3 min audio, RTF 0.96, 0.3 min, RAM vârf 4.9G, MPS 4.2G
+3 noi (39/2007), 0.4 min audio, RTF 0.89, 0.4 min, RAM vârf 4.9G, MPS 4.2G
+25 noi (61/2007), 5.5 min audio, RTF 0.75, 4.1 min, RAM vârf 4.9G, MPS 4.2G
+50 noi (86/2007), 10.6 min audio, RTF 0.83, 8.9 min, RAM vârf 4.9G, MPS 4.3G
+75 noi (111/2007), 14.8 min audio, RTF 0.80, 11.9 min, RAM vârf 4.9G, MPS 4.3G
+100 noi (136/2007), 19.5 min audio, RTF 0.78, 15.3 min, RAM vârf 4.9G, MPS 4.3G
+125 noi (161/2007), 25.3 min audio, RTF 0.85, 21.6 min, RAM vârf 4.9G, MPS 4.4G
+150 noi (186/2007), 29.8 min audio, RTF 0.91, 27.0 min, RAM vârf 4.9G, MPS 4.4G
+175 noi (211/2007), 34.3 min audio, RTF 0.96, 33.0 min, RAM vârf 4.9G, MPS 4.4G
+200 noi (236/2007), 38.6 min audio, RTF 0.99, 38.3 min, RAM vârf 4.9G, MPS 10.4G
+225 noi (261/2007), 42.7 min audio, RTF 0.99, 42.1 min, RAM vârf 4.9G, MPS 5.5G
+250 noi (286/2007), 47.1 min audio, RTF 1.01, 47.6 min, RAM vârf 4.9G, MPS 4.4G
+275 noi (311/2007), 51.4 min audio, RTF 1.02, 52.3 min, RAM vârf 4.9G, MPS 4.4G
+300 noi (336/2007), 55.6 min audio, RTF 0.99, 54.8 min, RAM vârf 4.9G, MPS 4.5G
+325 noi (361/2007), 60.5 min audio, RTF 0.97, 58.6 min, RAM vârf 4.9G, MPS 4.5G
+350 noi (386/2007), 65.2 min audio, RTF 0.98, 64.0 min, RAM vârf 4.9G, MPS 4.5G
+375 noi (411/2007), 70.0 min audio, RTF 0.98, 68.8 min, RAM vârf 4.9G, MPS 4.5G
+400 noi (436/2007), 75.3 min audio, RTF 1.02, 76.7 min, RAM vârf 4.9G, MPS 4.5G
+425 noi (461/2007), 79.2 min audio, RTF 1.00, 78.8 min, RAM vârf 4.9G, MPS 4.5G
+450 noi (486/2007), 82.3 min audio, RTF 0.98, 81.0 min, RAM vârf 4.9G, MPS 4.5G
+475 noi (511/2007), 87.3 min audio, RTF 0.97, 85.0 min, RAM vârf 4.9G, MPS 4.5G
+500 noi (536/2007), 93.6 min audio, RTF 1.00, 93.1 min, RAM vârf 4.9G, MPS 4.5G
+525 noi (561/2007), 99.9 min audio, RTF 1.00, 99.4 min, RAM vârf 4.9G, MPS 4.5G
+550 noi (586/2007), 104.0 min audio, RTF 0.99, 102.5 min, RAM vârf 4.9G, MPS 4.5G
+575 noi (611/2007), 109.5 min audio, RTF 1.05, 115.5 min, RAM vârf 4.9G, MPS 4.5G
+600 noi (636/2007), 113.6 min audio, RTF 1.05, 119.8 min, RAM vârf 4.9G, MPS 4.5G
+625 noi (661/2007), 117.9 min audio, RTF 1.06, 125.0 min, RAM vârf 4.9G, MPS 4.5G
+650 noi (686/2007), 121.5 min audio, RTF 1.05, 128.1 min, RAM vârf 4.9G, MPS 4.5G
+675 noi (711/2007), 124.8 min audio, RTF 1.05, 130.5 min, RAM vârf 4.9G, MPS 4.5G
+700 noi (736/2007), 128.3 min audio, RTF 1.04, 133.8 min, RAM vârf 4.9G, MPS 4.5G
+725 noi (761/2007), 131.3 min audio, RTF 1.05, 137.5 min, RAM vârf 4.9G, MPS 4.5G
+750 noi (786/2007), 134.0 min audio, RTF 1.04, 139.4 min, RAM vârf 4.9G, MPS 4.5G
+775 noi (811/2007), 138.8 min audio, RTF 1.05, 145.2 min, RAM vârf 4.9G, MPS 4.5G
+800 noi (836/2007), 142.1 min audio, RTF 1.04, 147.8 min, RAM vârf 4.9G, MPS 4.5G
+825 noi (861/2007), 146.3 min audio, RTF 1.03, 150.4 min, RAM vârf 4.9G, MPS 4.5G
+850 noi (886/2007), 150.6 min audio, RTF 1.03, 154.9 min, RAM vârf 4.9G, MPS 4.5G
+875 noi (911/2007), 154.8 min audio, RTF 1.05, 162.0 min, RAM vârf 4.9G, MPS 4.6G
+900 noi (936/2007), 159.4 min audio, RTF 1.06, 169.6 min, RAM vârf 4.9G, MPS 5.0G
+925 noi (961/2007), 163.8 min audio, RTF 1.06, 174.2 min, RAM vârf 4.9G, MPS 4.5G
+950 noi (986/2007), 167.9 min audio, RTF 1.05, 176.5 min, RAM vârf 4.9G, MPS 4.5G
+975 noi (1011/2007), 171.4 min audio, RTF 1.05, 180.6 min, RAM vârf 4.9G, MPS 4.5G
+1000 noi (1036/2007), 175.7 min audio, RTF 1.05, 183.8 min, RAM vârf 4.9G, MPS 4.5G
+1025 noi (1061/2007), 178.6 min audio, RTF 1.04, 185.2 min, RAM vârf 4.9G, MPS 4.5G
+1050 noi (1086/2007), 182.5 min audio, RTF 1.03, 188.7 min, RAM vârf 4.9G, MPS 4.5G
+1075 noi (1111/2007), 186.4 min audio, RTF 1.03, 191.8 min, RAM vârf 4.9G, MPS 4.5G
+1100 noi (1136/2007), 191.1 min audio, RTF 1.04, 198.2 min, RAM vârf 4.9G, MPS 4.5G
+1125 noi (1161/2007), 195.8 min audio, RTF 1.05, 204.8 min, RAM vârf 4.9G, MPS 10.0G
+1150 noi (1186/2007), 199.2 min audio, RTF 1.05, 208.4 min, RAM vârf 4.9G, MPS 4.5G
+1175 noi (1211/2007), 204.1 min audio, RTF 1.05, 215.3 min, RAM vârf 4.9G, MPS 4.5G
+1200 noi (1236/2007), 207.2 min audio, RTF 1.05, 218.3 min, RAM vârf 4.9G, MPS 4.5G
+1225 noi (1261/2007), 211.7 min audio, RTF 1.05, 222.6 min, RAM vârf 4.9G, MPS 4.5G

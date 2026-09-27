@@ -1,0 +1,273 @@
+{
+ "id": "SecureMomRoute1",
+ "name": "Secure MOM — rutare proces-verbal",
+ "active": true,
+ "nodes": [
+  {
+   "id": "wh",
+   "name": "Webhook Secure MOM",
+   "type": "n8n-nodes-base.webhook",
+   "typeVersion": 2,
+   "position": [
+    0,
+    200
+   ],
+   "webhookId": "secure-mom",
+   "parameters": {
+    "httpMethod": "POST",
+    "path": "secure-mom",
+    "responseMode": "lastNode",
+    "responseData": "firstEntryJson",
+    "options": {}
+   }
+  },
+  {
+   "id": "sw",
+   "name": "Tip ședință",
+   "type": "n8n-nodes-base.switch",
+   "typeVersion": 3,
+   "position": [
+    260,
+    200
+   ],
+   "parameters": {
+    "rules": {
+     "values": [
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict"
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.meeting_type }}",
+          "rightValue": "medical",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "medical"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict"
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.meeting_type }}",
+          "rightValue": "executive",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "executive"
+      },
+      {
+       "conditions": {
+        "options": {
+         "caseSensitive": true,
+         "leftValue": "",
+         "typeValidation": "strict"
+        },
+        "conditions": [
+         {
+          "leftValue": "={{ $json.body.meeting_type }}",
+          "rightValue": "administrative",
+          "operator": {
+           "type": "string",
+           "operation": "equals"
+          }
+         }
+        ],
+        "combinator": "and"
+       },
+       "renameOutput": true,
+       "outputKey": "administrative"
+      }
+     ]
+    },
+    "options": {}
+   }
+  },
+  {
+   "id": "r_medical",
+   "name": "Rută Medical",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    540,
+    40
+   ],
+   "parameters": {
+    "jsCode": "// Ramura „Medical”: pregătește emailul (destinatari = lista de distribuție a tipului de ședință)\nconst ROUTE = 'medical';\nreturn $input.all().map((item) => {\n  const b = item.json.body;\n  const binary = {};\n  (b.attachments || []).forEach((a, i) => {\n    binary['att' + i] = {\n      data: a.content_b64,\n      fileName: a.filename,\n      mimeType: a.filename.endsWith('.docx')\n        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'\n        : 'application/octet-stream',\n    };\n  });\n  return {\n    json: {\n      route: ROUTE, priority: 'high', job_id: b.job_id,\n      to: (b.recipients || []).join(', '), from: b.sender,\n      subject: b.subject, html: b.html,\n      attachments: Object.keys(binary).join(','),\n    },\n    binary,\n  };\n});"
+   }
+  },
+  {
+   "id": "r_executive",
+   "name": "Rută Executiv",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    540,
+    200
+   ],
+   "parameters": {
+    "jsCode": "// Ramura „Executiv”: pregătește emailul (destinatari = lista de distribuție a tipului de ședință)\nconst ROUTE = 'executive';\nreturn $input.all().map((item) => {\n  const b = item.json.body;\n  const binary = {};\n  (b.attachments || []).forEach((a, i) => {\n    binary['att' + i] = {\n      data: a.content_b64,\n      fileName: a.filename,\n      mimeType: a.filename.endsWith('.docx')\n        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'\n        : 'application/octet-stream',\n    };\n  });\n  return {\n    json: {\n      route: ROUTE, priority: 'high', job_id: b.job_id,\n      to: (b.recipients || []).join(', '), from: b.sender,\n      subject: b.subject, html: b.html,\n      attachments: Object.keys(binary).join(','),\n    },\n    binary,\n  };\n});"
+   }
+  },
+  {
+   "id": "r_administrative",
+   "name": "Rută Administrativ",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    540,
+    360
+   ],
+   "parameters": {
+    "jsCode": "// Ramura „Administrativ”: pregătește emailul (destinatari = lista de distribuție a tipului de ședință)\nconst ROUTE = 'administrative';\nreturn $input.all().map((item) => {\n  const b = item.json.body;\n  const binary = {};\n  (b.attachments || []).forEach((a, i) => {\n    binary['att' + i] = {\n      data: a.content_b64,\n      fileName: a.filename,\n      mimeType: a.filename.endsWith('.docx')\n        ? 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'\n        : 'application/octet-stream',\n    };\n  });\n  return {\n    json: {\n      route: ROUTE, priority: 'normal', job_id: b.job_id,\n      to: (b.recipients || []).join(', '), from: b.sender,\n      subject: b.subject, html: b.html,\n      attachments: Object.keys(binary).join(','),\n    },\n    binary,\n  };\n});"
+   }
+  },
+  {
+   "id": "mail",
+   "name": "Email intern (SMTP)",
+   "type": "n8n-nodes-base.emailSend",
+   "typeVersion": 2.1,
+   "position": [
+    820,
+    200
+   ],
+   "parameters": {
+    "fromEmail": "={{ $json.from }}",
+    "toEmail": "={{ $json.to }}",
+    "subject": "={{ $json.subject }}",
+    "emailFormat": "html",
+    "html": "={{ $json.html }}",
+    "options": {
+     "attachments": "={{ $json.attachments }}",
+     "appendAttribution": false
+    }
+   },
+   "credentials": {
+    "smtp": {
+     "id": "mailpit0000001",
+     "name": "SMTP intern (Mailpit)"
+    }
+   }
+  },
+  {
+   "id": "res",
+   "name": "Rezultat",
+   "type": "n8n-nodes-base.code",
+   "typeVersion": 2,
+   "position": [
+    1080,
+    200
+   ],
+   "parameters": {
+    "jsCode": "return $input.all().map((i) => ({ json: { ok: true, route: $('Tip ședință').first().json.body.meeting_type, accepted: i.json.accepted, messageId: i.json.messageId } }));"
+   }
+  }
+ ],
+ "connections": {
+  "Webhook Secure MOM": {
+   "main": [
+    [
+     {
+      "node": "Tip ședință",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Tip ședință": {
+   "main": [
+    [
+     {
+      "node": "Rută Medical",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Rută Executiv",
+      "type": "main",
+      "index": 0
+     }
+    ],
+    [
+     {
+      "node": "Rută Administrativ",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Email intern (SMTP)": {
+   "main": [
+    [
+     {
+      "node": "Rezultat",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Rută Medical": {
+   "main": [
+    [
+     {
+      "node": "Email intern (SMTP)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Rută Executiv": {
+   "main": [
+    [
+     {
+      "node": "Email intern (SMTP)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  },
+  "Rută Administrativ": {
+   "main": [
+    [
+     {
+      "node": "Email intern (SMTP)",
+      "type": "main",
+      "index": 0
+     }
+    ]
+   ]
+  }
+ },
+ "settings": {
+  "executionOrder": "v1"
+ },
+ "pinData": {}
+}

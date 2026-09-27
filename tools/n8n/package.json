@@ -1,0 +1,8 @@
+{
+  "name": "secure-mom-n8n",
+  "private": true,
+  "description": "n8n self-hosted pentru rutarea proceselor-verbale Secure MOM",
+  "dependencies": {
+    "n8n": "^1.123.82"
+  }
+}
